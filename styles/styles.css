@@ -1,0 +1,84 @@
+html, body {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 24px;
+    color: #403e59;
+}
+
+* {
+    outline: none;
+}
+
+.rs-picker-menu::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    transform: rotate(90deg);
+    width: 10px;
+    height: 4px;
+}
+
+.rs-picker-menu::-webkit-scrollbar-thumb {
+    background: #8589ad;
+}
+
+.rs-auto-complete-menu {
+    max-height: 300px;
+    overflow: scroll;
+}
+
+.rs-progress-line-bg {
+    transition: 1.5s ease-in-out !important;
+}
+
+.rs-progress-circle .rs-progress-stroke {
+    transition: stroke-dashoffset 1.3s ease, stroke-dasharray 1.2s ease-in-out, stroke 1.3s;
+}
+
+.rs-table-row:hover {
+    box-shadow: 0px 2px 8px rgba(64, 62, 89, 0.08), 0px 6px 24px rgba(64, 62, 89, 0.08);
+    z-index: 100;
+}
+
+
+.rs-modal-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.rs-modal-title {
+    font-weight: 500;
+    font-size: 20px !important;
+    line-height: 28px !important;
+}
+
+.rs-modal-body {
+    font-size: 16px !important;
+    line-height: 24px !important;
+
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+}
+
+.rs-modal-footer {
+    border-top: 1px solid #E4E6ED;
+    padding-top: 12px;
+}
+
+.rs-alert-item-close {
+    display: none;
+}
+
+.rs-alert-item-content {
+    color: #ffffff !important;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    background: #403E59 !important;
+    border-radius: 4px;
+    padding-right: 20px;
+}
+
+.rs-icon {
+    margin-top: 2px;
+}
