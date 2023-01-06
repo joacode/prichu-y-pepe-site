@@ -1,0 +1,13 @@
+{
+  "theme_color": "#ffffff",
+  "background_color": "#fff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Finance",
+  "short_name": "FNC",
+  "description": "Financial tool",
+  "icons": [
+    "favicon.ico"
+  ]
+}
