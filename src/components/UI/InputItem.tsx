@@ -6,7 +6,7 @@ import AppContext from '../../contexts/AppContext'
 import { ItemContainer } from '../RecordDetail'
 
 const Input = styled(RSInput)`
-    width: 100%;
+    width: 400px;
     display: inline-block;
 `
 

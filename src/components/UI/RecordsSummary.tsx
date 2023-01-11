@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useContext, useMemo } from 'react'
 import Box from './Box'
-import { RecordInterface } from '../../models/record'
+import { RecordInterface } from '../../models/guest'
 import ItemDetail from './ItemDetail'
 import { ItemContainer } from '../RecordDetail'
 import AppContext from '../../contexts/AppContext'
