@@ -12,6 +12,14 @@ const Container = styled.div`
     background: transparent;
     z-index: 1;
     position: relative;
+
+    @media only screen and (max-width: 375px) and (max-height: 667px) {
+        height: 100vh;
+    }
+
+    @media only screen and (max-width: 360px) and (max-height: 640px) {
+        height: 100vh;
+    }
 `
 
 const A = styled.a`

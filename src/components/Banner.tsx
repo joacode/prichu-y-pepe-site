@@ -30,15 +30,44 @@ const Img = styled.img`
         width: auto;
     }
 
+    @media only screen and (max-width: 1024px) and (max-height: 1366px) and (min-width: 1024px) and (min-height: 1366px) {
+        height: 100vh;
+        width: auto;
+        margin-left: -13em;
+    }
+
+    @media only screen and (max-width: 912px) and (max-height: 1368px) and (min-width: 912px) and (min-height: 1368px) {
+        height: 100vh;
+        width: auto;
+        margin-left: -13em;
+    }
+
+    @media only screen and (max-width: 820px) and (max-height: 1180px) and (min-width: 820px) and (min-height: 1180px) {
+        height: 99vh;
+        width: auto;
+        margin-left: -10em;
+    }
+
     @media (max-width: 768px) {
         height: 100vh;
         width: auto;
+    }
+
+    @media only screen and (max-width: 768px) and (max-height: 1024px) and (min-width: 768px) and (min-height: 1024px) {
+        height: 99vh;
+        width: auto;
+        margin-left: -8em;
     }
 
     @media (max-width: 640px) {
         height: 100vh;
         width: auto;
         margin-left: -6em;
+    }
+
+    @media only screen and (max-width: 540px) and (max-height: 720px) {
+        height: 99vh;
+        width: auto;
     }
 
     @media (max-width: 425px) {
@@ -53,10 +82,22 @@ const Img = styled.img`
         margin-left: -16em;
     }
 
+    @media only screen and (max-width: 412px) and (max-height: 915px) {
+        height: 99vh;
+        width: auto;
+        margin-left: -16em;
+    }
+
     @media (max-width: 375px) {
-        height: 100vh;
+        height: 99vh;
         width: auto;
         margin-left: -8em;
+    }
+
+    @media (max-width: 375px) and (max-height: 812px) and (min-width: 375px) and (min-height: 812px) {
+        height: 99vh;
+        width: auto;
+        margin-left: -14em;
     }
 
     @media (max-width: 360px) and (max-height: 740px) {

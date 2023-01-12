@@ -21,6 +21,10 @@ const Container = styled.div`
         height: 180vh;
     }
 
+    @media only screen and (max-width: 768px) and (max-height: 1024px) and (min-width: 768px) and (min-height: 1024px) {
+        height: 105vh;
+    }
+
     @media (max-width: 425px) {
         height: 180vh;
     }
@@ -29,8 +33,20 @@ const Container = styled.div`
         height: 130vh;
     }
 
+    @media only screen and (max-width: 412px) and (max-height: 915px) {
+        height: 130vh;
+    }
+
     @media (max-width: 375px) {
         height: 180vh;
+    }
+
+    @media (max-width: 375px) and (max-height: 812px) and (min-width: 375px) and (min-height: 812px) {
+        height: 140vh;
+    }
+
+    @media (max-width: 360px) and (max-height: 740px) {
+        height: 160vh;
     }
 `
 
@@ -78,9 +94,28 @@ const RSVP: FC<RSVPPRops> = ({ rsvp }): ReactElement => {
                 windowDimensions.height === 896) ||
             (windowDimensions.width === 390 &&
                 windowDimensions.height === 844) ||
-            (windowDimensions.width === 393 && windowDimensions.height === 851)
+            (windowDimensions.width === 393 &&
+                windowDimensions.height === 851) ||
+            (windowDimensions.width === 412 &&
+                windowDimensions.height === 915) ||
+            (windowDimensions.width === 412 && windowDimensions.height === 914)
         ) {
             return '490vh'
+        }
+
+        if (windowDimensions.width === 360 && windowDimensions.height === 740) {
+            return '510vh'
+        }
+
+        if (windowDimensions.width === 375 && windowDimensions.height === 812) {
+            return '515vh'
+        }
+
+        if (
+            windowDimensions.width === 768 &&
+            windowDimensions.height === 1024
+        ) {
+            return '438vh'
         }
 
         if (windowDimensions.width <= 425) {

@@ -41,8 +41,24 @@ const Container = styled.div`
         height: 250vh;
     }
 
+    @media only screen and (max-width: 1024px) and (max-height: 1366px) and (min-width: 1024px) and (min-height: 1366px) {
+        height: 130vh;
+    }
+
+    @media only screen and (max-width: 912px) and (max-height: 1368px) and (min-width: 912px) and (min-height: 1368px) {
+        height: 130vh;
+    }
+
+    @media only screen and (max-width: 820px) and (max-height: 1180px) and (min-width: 820px) and (min-height: 1180px) {
+        height: 160vh;
+    }
+
     @media (max-width: 768px) {
         height: 280vh;
+    }
+
+    @media only screen and (max-width: 768px) and (max-height: 1024px) and (min-width: 768px) and (min-height: 1024px) {
+        height: 180vh;
     }
 
     @media (max-width: 425px) {
@@ -53,11 +69,27 @@ const Container = styled.div`
         height: 190vh;
     }
 
+    @media only screen and (max-width: 412px) and (max-height: 915px) {
+        height: 190vh;
+    }
+
     @media only screen and (max-width: 390px) and (max-height: 844px) {
         height: 210vh;
     }
 
     @media (max-width: 375px) {
+        height: 270vh;
+    }
+
+    @media (max-width: 375px) and (max-height: 812px) and (min-width: 375px) and (min-height: 812px) {
+        height: 215vh;
+    }
+
+    @media only screen and (max-width: 360px) and (max-height: 740px) {
+        height: 230vh;
+    }
+
+    @media only screen and (max-width: 360px) and (max-height: 640px) {
         height: 270vh;
     }
 `
