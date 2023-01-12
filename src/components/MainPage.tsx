@@ -14,7 +14,7 @@ import Gallery from './Gallery'
 import Header from './UI/Layout/Header'
 
 const MainPage = (): ReactElement => {
-    const { maxResolutionQuery, windowDimensions } = useContext(AppContext)
+    const { windowDimensions } = useContext(AppContext)
     const [offset, setOffset] = useState(0)
 
     const banner = useRef(null)
@@ -31,13 +31,10 @@ const MainPage = (): ReactElement => {
 
     useEffect(() => {
         const onScroll = (): void => setOffset(window.pageYOffset)
-        // clean up code
         window.removeEventListener('scroll', onScroll)
         window.addEventListener('scroll', onScroll, { passive: true })
         return (): void => window.removeEventListener('scroll', onScroll)
     }, [])
-
-    console.log(offset)
 
     return (
         <div>

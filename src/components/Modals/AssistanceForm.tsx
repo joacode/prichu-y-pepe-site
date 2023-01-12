@@ -19,6 +19,10 @@ const Container = styled.div`
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+
+    @media (max-width: 768px) {
+        margin-bottom: 70px;
+    }
 `
 
 const UpperContainer = styled.div`
@@ -43,7 +47,7 @@ const specialMenu = [
 
 const AssistanceForm: FC = (): ReactElement => {
     const router = useRouter()
-    const { maxResolutionQuery } = useContext(AppContext)
+    const { windowDimensions } = useContext(AppContext)
     const [guest, setGuest] = useState<GuestInterface>()
 
     const nameChange = (value: string): void => {
@@ -82,6 +86,13 @@ const AssistanceForm: FC = (): ReactElement => {
         }))
     }
 
+    const songChange = (value: string): void => {
+        setGuest(prevState => ({
+            ...prevState,
+            song: value,
+        }))
+    }
+
     const refetch = useCallback(() => {
         setTimeout(router.reload, 3000)
     }, [])
@@ -94,6 +105,7 @@ const AssistanceForm: FC = (): ReactElement => {
             lastName: '',
             assistance: true,
             menu: SpecialMenu.DEFAULT,
+            song: '',
         })
     }
 
@@ -103,17 +115,30 @@ const AssistanceForm: FC = (): ReactElement => {
                 <InputItem
                     label="Tu nombre:"
                     onChange={nameChange}
-                    placeholder="Ingresa tu nombre"
-                    // defaultValue=""
+                    placeholder={
+                        windowDimensions.width <= 485 ||
+                        windowDimensions.width > 768
+                            ? 'Nombre'
+                            : 'Ingresa tu nombre'
+                    }
                 />
                 <InputItem
                     label="Tu apellido:"
                     onChange={lastNameChange}
-                    placeholder="Ingresa tu apellido"
-                    // defaultValue=""
+                    placeholder={
+                        windowDimensions.width <= 485 ||
+                        windowDimensions.width > 768
+                            ? 'Apellido'
+                            : 'Ingresa tu apellido'
+                    }
                 />
             </UpperContainer>
             <div>
+                <InputItem
+                    label="Una cancion que no pueda faltar:"
+                    onChange={songChange}
+                    placeholder="Cancion"
+                />
                 <InputItem
                     label="Asistencia:"
                     onChange={assistanceChange}

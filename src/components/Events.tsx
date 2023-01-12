@@ -1,7 +1,8 @@
-import React, { FC, MutableRefObject, ReactElement } from 'react'
+import React, { FC, MutableRefObject, ReactElement, useContext } from 'react'
 import { Grid as RSGrid } from 'rsuite'
 import styled from 'styled-components'
 import { theme } from 'styles/theme'
+import AppContext from 'src/contexts/AppContext'
 import Typography from './UI/Typography'
 import Box from './UI/Box'
 import FlowersBackground from './UI/FlowersBackground'
@@ -9,12 +10,56 @@ import PageTitle from './UI/PageTitle'
 
 const Grid = styled(RSGrid)`
     width: fit-content;
+    margin-top: 70px;
+
+    @media (min-width: 2500px) {
+        margin-top: 250px;
+    }
+
+    @media (max-width: 1149px) {
+        height: 100vw;
+        width: fit-content;
+        align-items: center;
+        display: grid;
+    }
+
+    @media (max-width: 425px) {
+        height: 100vw;
+        width: fit-content;
+        align-items: center;
+        display: grid;
+        margin-top: 0;
+    }
 `
 
 const Container = styled.div`
     width: 100%;
     overflow: hidden;
     height: 100vh;
+
+    @media (max-width: 1149px) {
+        height: 250vh;
+    }
+
+    @media (max-width: 768px) {
+        height: 280vh;
+    }
+
+    @media (max-width: 425px) {
+        height: 270vh;
+    }
+
+    @media only screen and (max-width: 414px) and (max-height: 896px) {
+        height: 190vh;
+    }
+
+    @media only screen and (max-width: 390px) and (max-height: 844px) {
+        height: 210vh;
+    }
+
+    @media (max-width: 375px) {
+        height: 270vh;
+    }
 `
 
 const BoxTitleContainer = styled.div`
@@ -24,6 +69,8 @@ const BoxTitleContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
 `
 
 const Img = styled.img`
@@ -63,11 +110,12 @@ interface EventsProps {
 }
 
 const Events: FC<EventsProps> = ({ events }): ReactElement => {
+    const { windowDimensions } = useContext(AppContext)
     return (
         <Container ref={events}>
             <FlowersBackground />
             <PageTitle title="EVENTOS" />
-            <Grid>
+            <Grid style={{ zIndex: 1 }}>
                 {locationConfig.map(location => {
                     return (
                         <Box>
@@ -128,6 +176,12 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
                         </Box>
                     )
                 })}
+                {windowDimensions.width <= 1024 && (
+                    <FlowersBackground top="199vh" />
+                )}
+                {windowDimensions.width <= 768 && (
+                    <FlowersBackground top="300vh" />
+                )}
             </Grid>
         </Container>
     )

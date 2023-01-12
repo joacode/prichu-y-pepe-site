@@ -1,7 +1,8 @@
-import React, { FC, MutableRefObject, ReactElement } from 'react'
+import React, { FC, MutableRefObject, ReactElement, useContext } from 'react'
 import { Carousel } from 'rsuite'
 import styled from 'styled-components'
 import { theme } from 'styles/theme'
+import AppContext from 'src/contexts/AppContext'
 import PinkBackground from './UI/PinkBackground'
 import PageTitle from './UI/PageTitle'
 
@@ -17,7 +18,6 @@ const ImgContainer = styled.div`
     width: 100%;
     height: 100%;
     overflow: hidden;
-    // background: ${theme.colors.header};
     background: transparent;
     display: flex;
     justify-content: center;
@@ -26,7 +26,6 @@ const ImgContainer = styled.div`
 
 const Img = styled.img`
     max-width: 100%;
-    // max-height: 100%;
     max-height: 70vh;
 `
 
@@ -53,6 +52,7 @@ const imgConfig = [
 ]
 
 const Gallery: FC<GalleryProps> = ({ gallery }): ReactElement => {
+    const { windowDimensions } = useContext(AppContext)
     return (
         <>
             <PinkBackground reference={gallery} />
@@ -60,15 +60,16 @@ const Gallery: FC<GalleryProps> = ({ gallery }): ReactElement => {
                 <PageTitle title="NOSOTROS" color={theme.colors.white.normal} />
                 <Carousel
                     style={{
-                        marginTop: '40px',
+                        marginTop:
+                            windowDimensions.width >= 2500 ? '150px' : '40px',
                         marginRight: 'auto',
                         marginLeft: 'auto',
-                        width: '51vw',
+                        width: '80vw',
                         height: '70vh',
                         overflow: 'hidden',
                         background: 'transparent',
                     }}
-                    // autoplay
+                    autoplay
                     className="custom-slider"
                 >
                     {imgConfig.map((img, index) => (

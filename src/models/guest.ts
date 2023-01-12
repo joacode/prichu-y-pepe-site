@@ -6,6 +6,7 @@ export interface GuestInterface {
     lastName: string
     assistance: boolean
     menu: SpecialMenu
+    song: string
 }
 
 const guestSchema = new Schema<GuestInterface>({
@@ -13,6 +14,7 @@ const guestSchema = new Schema<GuestInterface>({
     lastName: { type: String },
     assistance: { type: Boolean },
     menu: ['VEGGIE', 'VEGAN', 'COELIAC', 'DEFAULT'],
+    song: { type: String },
 })
 
 const Guest: Model<GuestInterface> =

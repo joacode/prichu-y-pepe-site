@@ -96,7 +96,7 @@ export default AdminPage
 //     const [showDeleteRecordModal, setShowDeleteRecordModal] = useState(false)
 //     const [deleteId, setDeleteId] = useState<number>(null)
 
-//     const { maxResolutionQuery, windowDimensions } = useContext(AppContext)
+//     const {  windowDimensions } = useContext(AppContext)
 
 //     const onRowClick = (id: number, edit?: boolean): void => {
 //         if (edit) {

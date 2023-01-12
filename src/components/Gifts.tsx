@@ -1,6 +1,7 @@
-import React, { ReactElement, FC, MutableRefObject } from 'react'
+import React, { ReactElement, FC, MutableRefObject, useContext } from 'react'
 import styled from 'styled-components'
 import { theme } from 'styles/theme'
+import AppContext from 'src/contexts/AppContext'
 import Typography from './UI/Typography'
 import PinkBackground from './UI/PinkBackground'
 import PageTitle from './UI/PageTitle'
@@ -11,17 +12,6 @@ const Container = styled.div`
     background: transparent;
     z-index: 1;
     position: relative;
-`
-
-const GiftCard = styled.div`
-    height: 210px;
-    width: 420px;
-    padding: 4.5rem 0 3.5rem;
-    background: hsla(30, 15%, 95%, 0);
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    text-align: center;
 `
 
 const A = styled.a`
@@ -59,6 +49,7 @@ interface GiftsProps {
 }
 
 const Gifts: FC<GiftsProps> = ({ gifts }): ReactElement => {
+    const { windowDimensions } = useContext(AppContext)
     return (
         <>
             <PinkBackground reference={gifts} />
@@ -69,11 +60,15 @@ const Gifts: FC<GiftsProps> = ({ gifts }): ReactElement => {
                     style={{
                         width: '60%',
                         margin: '70px',
-                        marginBottom: '40px',
+                        marginBottom:
+                            windowDimensions.width >= 1024 ? '130px' : '40px',
                         marginLeft: 'auto',
                         marginRight: 'auto',
+                        marginTop:
+                            windowDimensions.width >= 2500 ? '130px' : '70px',
                         textAlign: 'center',
-                        fontSize: '25px',
+                        fontSize:
+                            windowDimensions.width <= 425 ? '20px' : '25px',
                         fontWeight: 400,
                     }}
                 >
@@ -81,25 +76,12 @@ const Gifts: FC<GiftsProps> = ({ gifts }): ReactElement => {
                     más que suficiente, pero si queres hacernos un regalo, te
                     dejamos el link a nuestra lista:
                 </Typography>
-                <GiftCard>
-                    {/* <Typography
-                        style={{
-                            fontSize: '1rem',
-                            letterSpacing: '.2rem',
-                            lineHeight: '1.6rem',
-                            marginBottom: '1.5rem',
-                            fontWeight: 600,
-                        }}
-                    >
-                        ¿QUERÉS REGALARNOS?
-                    </Typography> */}
-                    <A
-                        href="https://confites.com/pareja/prichuypepe/regalar"
-                        target="_blank"
-                    >
-                        VER LISTA
-                    </A>
-                </GiftCard>
+                <A
+                    href="https://confites.com/pareja/prichuypepe/regalar"
+                    target="_blank"
+                >
+                    VER LISTA
+                </A>
             </Container>
         </>
     )

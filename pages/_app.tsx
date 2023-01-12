@@ -17,7 +17,6 @@ export default function MyApp(props): ReactElement {
 
     useEffect(() => {
         const { innerWidth: width, innerHeight: height } = window
-        console.log(window)
         setWindowDimensions({
             width,
             height,
@@ -31,7 +30,6 @@ export default function MyApp(props): ReactElement {
             </Head>
             <AppContext.Provider
                 value={{
-                    maxResolutionQuery: 600,
                     windowDimensions,
                 }}
             >

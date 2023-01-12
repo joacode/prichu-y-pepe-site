@@ -10,7 +10,7 @@ interface RecordsSummaryProps {
 }
 
 const RecordsSummary: FC<RecordsSummaryProps> = ({ records }): ReactElement => {
-    const { maxResolutionQuery, windowDimensions } = useContext(AppContext)
+    const { windowDimensions } = useContext(AppContext)
 
     const totalAvailable = useMemo((): number => {
         return records

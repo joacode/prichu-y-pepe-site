@@ -17,7 +17,7 @@ interface PageTitleProps {
 
 const PageTitle: FC<PageTitleProps> = ({ color, title }): ReactElement => {
     return (
-        <>
+        <div style={{ zIndex: 1, position: 'relative' }}>
             <TitleContainer>
                 <Typography color={color}>{title}</Typography>
             </TitleContainer>
@@ -28,7 +28,7 @@ const PageTitle: FC<PageTitleProps> = ({ color, title }): ReactElement => {
                         : theme.colors.pink
                 }
             />
-        </>
+        </div>
     )
 }
 

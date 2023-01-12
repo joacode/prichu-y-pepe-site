@@ -1,15 +1,13 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useContext } from 'react'
+import AppContext from 'src/contexts/AppContext'
 import styled from 'styled-components'
+import { theme } from 'styles/theme'
+import InstagramLogo from './InstagramLogo'
 import Typography from './Typography'
 
 const ImgContainer = styled.div`
     width: 100%;
     display: grid;
-`
-
-const Img = styled.img`
-    width: 70px;
-    display: inline-block;
 `
 
 const A = styled.a`
@@ -25,6 +23,7 @@ const A = styled.a`
 `
 
 const InstagramSection = (): ReactElement => {
+    const { windowDimensions } = useContext(AppContext)
     return (
         <div style={{ width: '100%' }}>
             <ImgContainer>
@@ -33,7 +32,9 @@ const InstagramSection = (): ReactElement => {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <Img src="/images/instagram-logo.svg" alt="ig" />
+                    <span style={{ display: 'inline-block' }}>
+                        <InstagramLogo color={theme.colors.pink} size="70px" />
+                    </span>
                 </A>
                 <Typography
                     style={{
@@ -69,7 +70,8 @@ const InstagramSection = (): ReactElement => {
                         fontSize: '20px',
                         opacity: 0.6,
                         textAlign: 'center',
-                        marginTop: '30px',
+                        marginTop:
+                            windowDimensions.width <= 768 ? '13px' : '30px',
                         width: '85%',
                         marginLeft: 'auto',
                         marginRight: 'auto',
