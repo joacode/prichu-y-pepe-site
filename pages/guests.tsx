@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react'
 import Layout from 'src/components/UI/Layout/Layout'
-import RecordsTable from 'src/components/RecordsTable'
 import { NextPage } from 'next'
+import MainPage from 'src/components/MainPage'
 
-const Records: NextPage = (): ReactElement => {
+const Guests: NextPage = (): ReactElement => {
     return (
         <Layout>
-            <RecordsTable />
+            <MainPage />
         </Layout>
     )
 }
 
-export default Records
+export default Guests

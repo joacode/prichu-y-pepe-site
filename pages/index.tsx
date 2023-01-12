@@ -6,7 +6,7 @@ function HomePage(): JSX.Element {
     const router = useRouter()
 
     useEffect(() => {
-        router.push('/records')
+        router.push('/guests')
     }, [router])
 
     return <Layout loading />

@@ -1,4 +1,4 @@
-import Record from 'src/models/record'
+import Guest from 'src/models/guest'
 import connectMongo from 'utils/connectMongo'
 
 /**
@@ -10,7 +10,7 @@ export default async function handler(req, res): Promise<void> {
     switch (req.method) {
         case 'GET': {
             await connectMongo()
-            const records = await Record.find({})
+            const records = await Guest.find({})
             const data = JSON.parse(JSON.stringify(records))
 
             res.status(200).json(data)
@@ -19,9 +19,9 @@ export default async function handler(req, res): Promise<void> {
 
         case 'POST': {
             await connectMongo()
-            const record = await new Record(req.body).save()
+            const guest = await new Guest(req.body).save()
 
-            res.status(200).json({ record })
+            res.status(200).json({ guest })
             break
         }
 

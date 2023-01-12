@@ -51,8 +51,12 @@ class MyDocument extends Document {
                     />
                     <link rel="preconnect" href="https://fonts.gstatic.com" />
                     <link
-                        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+                        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=GFS+Didot&family=Montserrat:wght@300;400&family=Roboto&display=swap"
                         rel="stylesheet"
+                    />
+                    <link
+                        rel="stylesheet"
+                        href="https://use.typekit.net/uot6kmc.css"
                     />
                     <link rel="stylesheet" href="/styles/styles.css" />
                     <link rel="stylesheet" href="/styles/globals.css" />

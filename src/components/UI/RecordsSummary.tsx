@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext, useMemo } from 'react'
 import Box from './Box'
-import { RecordInterface } from '../../models/record'
-import ItemDetail from './ItemDetail'
+import { RecordInterface } from '../../models/guest'
+import ItemDetail from './Label'
 import { ItemContainer } from '../RecordDetail'
 import AppContext from '../../contexts/AppContext'
 
@@ -10,7 +10,7 @@ interface RecordsSummaryProps {
 }
 
 const RecordsSummary: FC<RecordsSummaryProps> = ({ records }): ReactElement => {
-    const { maxResolutionQuery, windowDimensions } = useContext(AppContext)
+    const { windowDimensions } = useContext(AppContext)
 
     const totalAvailable = useMemo((): number => {
         return records

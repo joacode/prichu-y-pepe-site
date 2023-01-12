@@ -53,12 +53,12 @@ export const fetchRecordMessage = (p: string): void => {
     }
 }
 
-export const addRecordMessage = (p: string): void => {
+export const addGuestMessage = (p: string): void => {
     switch (p) {
         case 'success': {
             toaster.push(
                 <Message type="success" showIcon>
-                    Record added successfully
+                    Registrado!
                 </Message>
             )
             break

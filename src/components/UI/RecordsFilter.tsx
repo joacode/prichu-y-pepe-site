@@ -3,7 +3,7 @@ import { DatePicker as RSDatePicker, Input as RSInput } from 'rsuite'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import Button from './Button'
-import { RecordFilter, RecordInterface } from '../../models/record'
+import { RecordFilter, RecordInterface } from '../../models/guest'
 import AppContext from '../../contexts/AppContext'
 
 interface Props {

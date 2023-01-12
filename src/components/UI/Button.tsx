@@ -22,6 +22,8 @@ interface StyledButtonProps {
 }
 
 const StyledButton = styled(RSuiteButton)<StyledButtonProps>`
+    width: 100%;
+
     @media (max-width: ${(props): string => props?.maxWidth}) {
         display: inline-block;
     }

@@ -2,30 +2,22 @@ import React, { CSSProperties, FC, ReactElement, useContext } from 'react'
 import styled from 'styled-components'
 import AppContext from '../../contexts/AppContext'
 
-interface BoxProps {
-    width?: string
-    maxWidth?: string
-    lessPadding?: boolean
-    fullWidth?: boolean
-}
+const BoxContainer = styled.div`
+    display: inline-grid;
+    background: white;
+    border-radius: 0.25rem;
+    align-items: center;
+    margin: 40px;
+    max-width: fit-content;
+    height: fit-content;
+    box-shadow: 0px 5px 8px rgb(0 0 0 / 30%);
+    z-index: 2;
+    position: relative;
 
-const BoxContainer = styled.div<BoxProps>`
-  background: white;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 40px auto 40px;
-  padding: ${(props): string => (props?.lessPadding ? '10px' : '30px')}
-    //width: ${(props): string => (props?.fullWidth ? '100%' : '305px')}
-  width: fit-content;
-  max-width: 60rem;
-
-  @media (max-width: ${(props): string => props?.maxWidth}) {
-    margin: 20px 40px;
-    display: block;
-    width: ${(props): string => (props?.fullWidth ? '100%' : '305px')}
-  }
+    @media (max-width: 425px) {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 `
 
 interface Props {
@@ -41,11 +33,11 @@ const Box: FC<Props> = ({
     lessPadding,
     fullWidth,
 }): ReactElement => {
-    const { maxResolutionQuery } = useContext(AppContext)
+    // const { maxResolutionQuery } = useContext(AppContext)
 
     return (
         <BoxContainer
-            maxWidth={`${maxResolutionQuery}px`}
+            // maxWidth={`${maxResolutionQuery}px`}
             style={style}
             lessPadding={lessPadding}
             fullWidth={fullWidth}

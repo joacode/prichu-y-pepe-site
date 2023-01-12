@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useState } from 'react'
 import styled from 'styled-components'
-import { RecordInterface } from '../../models/record'
+import { RecordInterface } from '../../models/guest'
 import RecordsFilter from './RecordsFilter'
 import Button from './Button'
 

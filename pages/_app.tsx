@@ -26,11 +26,10 @@ export default function MyApp(props): ReactElement {
     return (
         <>
             <Head>
-                <title>Expense Tracker</title>
+                <title>Prichu & Pepe</title>
             </Head>
             <AppContext.Provider
                 value={{
-                    maxResolutionQuery: 600,
                     windowDimensions,
                 }}
             >
