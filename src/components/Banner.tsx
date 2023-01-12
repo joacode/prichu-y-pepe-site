@@ -1,7 +1,7 @@
 import React, { FC, MutableRefObject, ReactElement } from 'react'
 import styled from 'styled-components'
 import { theme } from 'styles/theme'
-import Typography from '../Typography'
+import Typography from './UI/Typography'
 
 const ImgContainer = styled.div`
     position: absolute;
@@ -36,7 +36,7 @@ const Banner: FC<BannerProps> = ({ banner }): ReactElement => {
     return (
         <>
             <ImgContainer ref={banner}>
-                <Img src="/images/IMG_4674.jpeg" alt="port" />
+                <Img src="/images/carousel/IMG_4674.jpeg" alt="port" />
             </ImgContainer>
             <Container>
                 <Typography

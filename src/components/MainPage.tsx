@@ -9,7 +9,8 @@ import AppContext from 'src/contexts/AppContext'
 import Events from './Events'
 import Gifts from './Gifts'
 import RSVP from './RSVP'
-import Banner from './UI/Banner'
+import Banner from './Banner'
+import Gallery from './Gallery'
 import Header from './UI/Layout/Header'
 
 const MainPage = (): ReactElement => {
@@ -40,21 +41,20 @@ const MainPage = (): ReactElement => {
 
     return (
         <div>
-            {offset > windowDimensions.height && (
-                <Header
-                    banner={banner}
-                    events={events}
-                    gifts={gifts}
-                    rsvp={rsvp}
-                    gallery={gallery}
-                    handleScroll={handleScroll}
-                />
-            )}
+            <Header
+                banner={banner}
+                events={events}
+                gifts={gifts}
+                rsvp={rsvp}
+                gallery={gallery}
+                handleScroll={handleScroll}
+                display={offset > windowDimensions.height - 1}
+            />
             <Banner banner={banner} />
             <Events events={events} />
             <Gifts gifts={gifts} />
             <RSVP rsvp={rsvp} />
-            {/* Galeria de fotos + instagram */}
+            <Gallery gallery={gallery} />
         </div>
     )
 }

@@ -1,21 +1,17 @@
 import mongoose, { Schema, Model } from 'mongoose'
-
-export enum SpecialMenu {
-    VEGGIE = 'VEGGIE',
-    VEGAN = 'VEGAN',
-    COELIAC = 'COELIAC',
-    DEFAULT = 'DEFAULT',
-}
+import { SpecialMenu } from './specialMenu'
 
 export interface GuestInterface {
     name: string
-    assistance: string
+    lastName: string
+    assistance: boolean
     menu: SpecialMenu
 }
 
 const guestSchema = new Schema<GuestInterface>({
     name: { type: String, required: true },
-    assistance: Boolean,
+    lastName: { type: String },
+    assistance: { type: Boolean },
     menu: ['VEGGIE', 'VEGAN', 'COELIAC', 'DEFAULT'],
 })
 

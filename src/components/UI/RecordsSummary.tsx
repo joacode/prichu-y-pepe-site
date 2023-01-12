@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext, useMemo } from 'react'
 import Box from './Box'
 import { RecordInterface } from '../../models/guest'
-import ItemDetail from './ItemDetail'
+import ItemDetail from './Label'
 import { ItemContainer } from '../RecordDetail'
 import AppContext from '../../contexts/AppContext'
 

@@ -1,19 +1,48 @@
-import React, { FC, ReactElement, useContext, useState } from 'react'
-import { DatePicker, Modal } from 'rsuite'
+import React, {
+    FC,
+    ReactElement,
+    useCallback,
+    useContext,
+    useState,
+} from 'react'
 import styled from 'styled-components'
+import { theme } from 'styles/theme'
+import { SpecialMenu } from 'src/models/specialMenu'
+import { useRouter } from 'next/router'
 import Button from '../UI/Button'
-import ItemDetail from '../UI/ItemDetail'
 import InputItem from '../UI/InputItem'
 import { GuestInterface } from '../../models/guest'
 import AppContext from '../../contexts/AppContext'
-import { ItemContainer } from '../RecordDetail'
-import Box from '../UI/Box'
+import { addGuestMessage } from '../UI/message'
 
 const Container = styled.div`
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 `
 
+const UpperContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+`
+
+const assistanceData = [
+    { label: 'Civil y Fiesta!', value: 'true' },
+    { label: 'Solo Civil', value: 'true' },
+    { label: 'Solo Fiesta', value: 'true' },
+    { label: 'No.', value: 'false' },
+]
+
+const specialMenu = [
+    { label: 'Como de todo!', value: SpecialMenu.DEFAULT },
+    { label: 'Sin TACC', value: SpecialMenu.COELIAC },
+    { label: 'Go Vegan!', value: SpecialMenu.VEGAN },
+    { label: 'Veggie Baby', value: SpecialMenu.VEGGIE },
+]
+
 const AssistanceForm: FC = (): ReactElement => {
+    const router = useRouter()
     const { maxResolutionQuery } = useContext(AppContext)
     const [guest, setGuest] = useState<GuestInterface>()
 
@@ -24,75 +53,94 @@ const AssistanceForm: FC = (): ReactElement => {
         }))
     }
 
-    const assistanceChange = (value: string): void => {
+    const lastNameChange = (value: string): void => {
         setGuest(prevState => ({
             ...prevState,
-            assistance: value,
+            lastName: value,
         }))
     }
 
-    const menuSelect = (value: string): void => {
-        console.log('select')
-        // setGuest(prevState => ({
-        //     ...prevState,
-        //     menu: value,
-        // }))
+    const assistanceChange = (value: string): void => {
+        setGuest(prevState => {
+            if (value === 'true') {
+                return {
+                    ...prevState,
+                    assistance: true,
+                }
+            }
+            return {
+                ...prevState,
+                assistance: false,
+            }
+        })
+    }
+
+    const menuSelect = (value: SpecialMenu): void => {
+        setGuest(prevState => ({
+            ...prevState,
+            menu: value,
+        }))
+    }
+
+    const refetch = useCallback(() => {
+        setTimeout(router.reload, 3000)
+    }, [])
+
+    const onSubmit = (): void => {
+        addGuestMessage('success')
+        // refetch()
+        setGuest({
+            name: '',
+            lastName: '',
+            assistance: true,
+            menu: SpecialMenu.DEFAULT,
+        })
     }
 
     return (
-        <Box
-            style={{
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                display: 'block',
-            }}
-        >
-            <Container>
+        <Container>
+            <UpperContainer>
                 <InputItem
-                    style={{ marginTop: 0, paddingTop: 0 }}
-                    label="Nombre:"
+                    label="Tu nombre:"
                     onChange={nameChange}
-                    edit
+                    placeholder="Ingresa tu nombre"
+                    // defaultValue=""
                 />
+                <InputItem
+                    label="Tu apellido:"
+                    onChange={lastNameChange}
+                    placeholder="Ingresa tu apellido"
+                    // defaultValue=""
+                />
+            </UpperContainer>
+            <div>
                 <InputItem
                     label="Asistencia:"
                     onChange={assistanceChange}
-                    edit
+                    select
+                    placeholder="Asistencia"
+                    data={assistanceData}
                 />
-                <InputItem label="Menu especial:" onChange={menuSelect} edit />
-                {/* <ItemContainer
-                    maxWidth={`${maxResolutionQuery}px`}
-                    style={{
-                        marginBottom: 0,
-                        paddingBottom: 0,
-                        borderBottom: 'none',
-                    }}
-                >
-                    <ItemDetail bolder>Date:</ItemDetail>
-                    <DatePicker
-                        placeholder="Select Date"
-                        onSelect={dateChange}
-                        oneTap
-                        format="yyyy-MM-dd"
-                        style={{ width: '100%' }}
-                    />
-                </ItemContainer> */}
-            </Container>
-            <div>
-                <Button
-                    appearance="ghost"
-                    onClick={(): void => console.log('close')}
-                >
-                    Cancel
-                </Button>
+                <InputItem
+                    label="Menu especial:"
+                    onChange={menuSelect}
+                    select
+                    placeholder="Menu especial"
+                    data={specialMenu}
+                />
+            </div>
+            <div style={{ padding: 15 }}>
                 <Button
                     appearance="primary"
-                    onClick={(): void => console.log(guest)}
+                    style={{
+                        background: theme.colors.pink,
+                    }}
+                    onClick={onSubmit}
                 >
-                    Submit
+                    ENVIAR
                 </Button>
             </div>
-        </Box>
+        </Container>
     )
 }
 

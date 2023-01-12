@@ -1,9 +1,9 @@
 import React, { MutableRefObject, ReactElement, FC } from 'react'
 import styled from 'styled-components'
 import AssistanceForm from './Modals/AssistanceForm'
-import Typography from './Typography'
-import Divider from './UI/Divider'
 import FlowersBackground from './UI/FlowersBackground'
+import InstagramSection from './UI/InstagramSection'
+import PageTitle from './UI/PageTitle'
 
 const Container = styled.div`
     width: 100%;
@@ -11,10 +11,12 @@ const Container = styled.div`
     height: 100vh;
 `
 
-const TitleContainer = styled.div`
+const BottomContainer = styled.div`
     display: flex;
-    justify-content: center;
-    margin-top: 60px;
+    width: 78vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
 `
 
 interface RSVPPRops {
@@ -25,21 +27,11 @@ const RSVP: FC<RSVPPRops> = ({ rsvp }): ReactElement => {
     return (
         <Container ref={rsvp}>
             <FlowersBackground />
-            <TitleContainer>
-                <Typography>RSVP</Typography>
-            </TitleContainer>
-            <Divider />
-            <Typography
-                style={{
-                    width: '60%',
-                    margin: '70px',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                }}
-            >
-                Confirma tu asistenciaaaaaaaa broooo
-            </Typography>
-            <AssistanceForm />
+            <PageTitle title="RSVP" />
+            <BottomContainer>
+                <AssistanceForm />
+                <InstagramSection />
+            </BottomContainer>
         </Container>
     )
 }

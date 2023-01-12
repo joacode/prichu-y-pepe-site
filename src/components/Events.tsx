@@ -2,10 +2,10 @@ import React, { FC, MutableRefObject, ReactElement } from 'react'
 import { Grid as RSGrid } from 'rsuite'
 import styled from 'styled-components'
 import { theme } from 'styles/theme'
-import Typography from './Typography'
+import Typography from './UI/Typography'
 import Box from './UI/Box'
-import Divider from './UI/Divider'
 import FlowersBackground from './UI/FlowersBackground'
+import PageTitle from './UI/PageTitle'
 
 const Grid = styled(RSGrid)`
     width: fit-content;
@@ -15,12 +15,6 @@ const Container = styled.div`
     width: 100%;
     overflow: hidden;
     height: 100vh;
-`
-
-const TitleContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-top: 60px;
 `
 
 const BoxTitleContainer = styled.div`
@@ -72,10 +66,7 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
     return (
         <Container ref={events}>
             <FlowersBackground />
-            <TitleContainer>
-                <Typography>EVENTOS</Typography>
-            </TitleContainer>
-            <Divider />
+            <PageTitle title="EVENTOS" />
             <Grid>
                 {locationConfig.map(location => {
                     return (
