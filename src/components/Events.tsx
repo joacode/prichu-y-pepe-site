@@ -66,15 +66,15 @@ const Container = styled.div`
     }
 
     @media only screen and (max-width: 414px) and (max-height: 896px) {
-        height: 190vh;
+        height: 213vh;
     }
 
     @media only screen and (max-width: 412px) and (max-height: 915px) {
-        height: 190vh;
+        height: 230vh;
     }
 
     @media only screen and (max-width: 390px) and (max-height: 844px) {
-        height: 210vh;
+        height: 220vh;
     }
 
     @media (max-width: 375px) {

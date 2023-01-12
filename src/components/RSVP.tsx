@@ -30,11 +30,11 @@ const Container = styled.div`
     }
 
     @media only screen and (max-width: 414px) and (max-height: 896px) {
-        height: 130vh;
+        height: 150vh;
     }
 
     @media only screen and (max-width: 412px) and (max-height: 915px) {
-        height: 130vh;
+        height: 150vh;
     }
 
     @media (max-width: 375px) {
