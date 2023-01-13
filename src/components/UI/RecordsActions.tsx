@@ -1,10 +1,10 @@
 import React, { FC, ReactElement, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
-import RecordsFilter from './RecordsFilter'
+import GuestsFilter from './GuestsFilter'
 import Button from './Button'
 import Box from './Box'
 import AddRecordModal from '../Modals/AddRecordModal'
-import { RecordsService } from '../../services/guestsService'
+import { GuestsService } from '../../services/guestsService'
 import { addRecordMessage } from './message'
 import { RecordInterface } from '../../models/guest'
 import AppContext from '../../contexts/AppContext'
@@ -12,24 +12,22 @@ import FilterPopUp from './FilterPopUp'
 
 interface Props {
     records: RecordInterface[]
-    filteredRecords: RecordInterface[]
-    setFilteredRecords: (r: RecordInterface[]) => void
+    filteredGuests: RecordInterface[]
+    setFilteredGuests: (r: RecordInterface[]) => void
 }
 
-const RecordsActions: FC<Props> = ({
+const GuestsActions: FC<Props> = ({
     records,
-    filteredRecords,
-    setFilteredRecords,
+    filteredGuests,
+    setFilteredGuests,
 }): ReactElement => {
     const router = useRouter()
     const [record, setRecord] = useState<RecordInterface>(null)
     const [showAddRecordModal, setShowAddRecordModal] = useState(false)
 
-    const { windowDimensions, maxResolutionQuery } = useContext(AppContext)
-
     const checkAndSubmit = (): void => {
         if (record.title !== '' && !Number.isNaN(record.amount)) {
-            RecordsService.create(record)
+            GuestsService.create(record)
                 .then(() => addRecordMessage('success'))
                 .catch(() => addRecordMessage('error'))
                 .finally(() => {
@@ -40,28 +38,16 @@ const RecordsActions: FC<Props> = ({
 
     return (
         <Box>
-            {windowDimensions.width > maxResolutionQuery ? (
-                <RecordsFilter
-                    records={records}
-                    filteredRecords={filteredRecords}
-                    setFilteredRecords={setFilteredRecords}
-                />
-            ) : (
-                <FilterPopUp
-                    records={records}
-                    filteredRecords={filteredRecords}
-                    setFilteredRecords={setFilteredRecords}
-                />
-            )}
+            <GuestsFilter
+                records={records}
+                filteredGuests={filteredGuests}
+                setFilteredGuests={setFilteredGuests}
+            />
             <Button
                 appearance="primary"
                 style={{
                     margin: '10px',
-                    width: `${
-                        windowDimensions.width < maxResolutionQuery
-                            ? '-webkit-fill-available'
-                            : 98
-                    }`,
+                    width: 98,
                     height: 36,
                 }}
                 onClick={(): void => setShowAddRecordModal(true)}
@@ -80,4 +66,4 @@ const RecordsActions: FC<Props> = ({
     )
 }
 
-export default RecordsActions
+export default GuestsActions

@@ -3,7 +3,6 @@ import React, {
     ReactElement,
     useCallback,
     useContext,
-    useEffect,
     useState,
 } from 'react'
 import styled from 'styled-components'
@@ -12,7 +11,6 @@ import { SpecialMenu } from 'src/models/specialMenu'
 import { useRouter } from 'next/router'
 import { CivilAssistance, PartyAssistance } from 'src/models/assistance'
 import { GuestsService } from 'src/services/guestsService'
-import isEmpty from 'lodash/isEmpty'
 import Button from './Button'
 import InputItem from './InputItem'
 import { GuestInterface } from '../../models/guest'
@@ -63,9 +61,7 @@ const specialMenu = [
 
 const AssistanceForm: FC = (): ReactElement => {
     const router = useRouter()
-    const { windowDimensions, scrollOffset, setScrollOffset } = useContext(
-        AppContext
-    )
+    const { windowDimensions } = useContext(AppContext)
     const [guest, setGuest] = useState<GuestInterface>({
         name: '',
         lastName: '',
@@ -89,14 +85,14 @@ const AssistanceForm: FC = (): ReactElement => {
         }))
     }
 
-    const civilAssistanceChange = (value: string): void => {
+    const civilAssistanceChange = (value: CivilAssistance): void => {
         setGuest(prevState => ({
             ...prevState,
             civilAssistance: value,
         }))
     }
 
-    const partyAssistanceChange = (value: string): void => {
+    const partyAssistanceChange = (value: PartyAssistance): void => {
         setGuest(prevState => ({
             ...prevState,
             partyAssistance: value,
@@ -121,10 +117,6 @@ const AssistanceForm: FC = (): ReactElement => {
         setTimeout(router.reload, 3000)
     }, [])
 
-    useEffect(() => {
-        GuestsService.find().then(res => console.log(res))
-    }, [])
-
     const onSubmit = useCallback(() => {
         if (
             guest?.name !== '' &&
@@ -139,7 +131,7 @@ const AssistanceForm: FC = (): ReactElement => {
                     sessionStorage.setItem('scrollToForm', 'true')
                     refetch()
                 })
-                .catch(() => console.log('err'))
+                .catch(() => addGuestMessage('error'))
         } else {
             addGuestMessage('error')
         }

@@ -10,8 +10,8 @@ export default async function handler(req, res): Promise<void> {
     switch (req.method) {
         case 'GET': {
             await connectMongo()
-            const records = await Guest.find({})
-            const data = JSON.parse(JSON.stringify(records))
+            const guests = await Guest.find({})
+            const data = JSON.parse(JSON.stringify(guests))
 
             res.status(200).json(data)
             break

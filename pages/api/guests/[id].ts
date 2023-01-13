@@ -9,14 +9,14 @@ import { NextApiRequest } from 'next'
 
 export default async function handler(req: NextApiRequest, res): Promise<void> {
     switch (req.method) {
-        case 'GET': {
-            await connectMongo()
-            const guest = await Guest.findById(req.query.id).exec()
-            const data = JSON.parse(JSON.stringify(guest))
+        // case 'GET': {
+        //     await connectMongo()
+        //     const guest = await Guest.findById(req.query.id).exec()
+        //     const data = JSON.parse(JSON.stringify(guest))
 
-            res.status(200).json(data)
-            break
-        }
+        //     res.status(200).json(data)
+        //     break
+        // }
 
         // case 'PUT': {
         //     await connectMongo()
@@ -36,13 +36,13 @@ export default async function handler(req: NextApiRequest, res): Promise<void> {
         //     break
         // }
 
-        // case 'DELETE': {
-        //     await connectMongo()
-        //     const guest = await Guest.deleteOne({ _id: req.query.id })
-        //     const data = JSON.parse(JSON.stringify(guest))
-        //     res.status(200).json(data)
-        //     break
-        // }
+        case 'DELETE': {
+            await connectMongo()
+            const guest = await Guest.deleteOne({ _id: req.query.id })
+            const data = JSON.parse(JSON.stringify(guest))
+            res.status(200).json(data)
+            break
+        }
 
         default:
             break

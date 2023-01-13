@@ -1,13 +1,23 @@
 import mongoose, { Schema, Model } from 'mongoose'
+import { CivilAssistance, PartyAssistance } from './assistance'
 import { SpecialMenu } from './specialMenu'
 
 export interface GuestInterface {
     name: string
     lastName: string
-    civilAssistance: string
-    partyAssistance: string
+    civilAssistance: CivilAssistance
+    partyAssistance: PartyAssistance
     menu: SpecialMenu
     song: string
+}
+
+export interface GuestFilter {
+    name?: string
+    lastName?: string
+    civilAssistance?: CivilAssistance
+    partyAssistance?: PartyAssistance
+    menu?: SpecialMenu
+    song?: string
 }
 
 const guestSchema = new Schema<GuestInterface>({
