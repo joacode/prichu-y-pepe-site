@@ -49,7 +49,7 @@ const Img = styled.img`
     }
 
     @media (max-width: 768px) {
-        height: 100vh;
+        height: 99vh;
         width: auto;
     }
 
@@ -60,9 +60,9 @@ const Img = styled.img`
     }
 
     @media (max-width: 640px) {
-        height: 100vh;
+        height: 99vh;
         width: auto;
-        margin-left: -6em;
+        margin-left: -13em;
     }
 
     @media only screen and (max-width: 540px) and (max-height: 720px) {
@@ -71,9 +71,9 @@ const Img = styled.img`
     }
 
     @media (max-width: 425px) {
-        height: 100vh;
+        height: 99vh;
         width: auto;
-        margin-left: -10em;
+        margin-left: -16em;
     }
 
     @media only screen and (max-width: 414px) and (max-height: 896px) {
@@ -116,13 +116,13 @@ const Container = styled.div`
     display: inline-grid;
     justify-content: center;
     align-content: center;
-    background: ${theme.colors.honey};
+    background: ${theme.colors.white.light};
 
     @media (max-width: 836px) {
         margin-top: calc(100vh - 14.4rem);
         height: 230px;
         text-align: center;
-        background: hsla(20, 29%, 65%, 1);
+        background: ${theme.colors.white.light};
     }
 
     @media (max-width: 396px) {
@@ -162,18 +162,21 @@ const Banner: FC<BannerProps> = ({ banner }): ReactElement => {
             </ImgContainer>
             <Container>
                 <BannerTypography
-                    variant="bannerTitle"
-                    color={theme.colors.white.normal}
-                >
-                    ¡NOS CASAMOS!
-                </BannerTypography>
-                <Typography
-                    color={theme.colors.white.normal}
+                    color={theme.colors.black}
                     style={{
                         width: 'fit-content',
                         marginLeft: 'auto',
                         marginRight: 'auto',
+                        letterSpacing: '0.3rem',
+                        fontSize: 20,
                     }}
+                >
+                    ¡NOS CASAMOS!
+                </BannerTypography>
+                <Typography
+                    variant="bannerTitle"
+                    color={theme.colors.black}
+                    style={{ fontFamily: `'Montserrat', sans-serif` }}
                 >
                     PRI & JOACO
                 </Typography>

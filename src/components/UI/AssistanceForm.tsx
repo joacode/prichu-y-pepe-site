@@ -3,6 +3,7 @@ import React, {
     ReactElement,
     useCallback,
     useContext,
+    useEffect,
     useState,
 } from 'react'
 import styled from 'styled-components'
@@ -65,7 +66,14 @@ const AssistanceForm: FC = (): ReactElement => {
     const { windowDimensions, scrollOffset, setScrollOffset } = useContext(
         AppContext
     )
-    const [guest, setGuest] = useState<GuestInterface>()
+    const [guest, setGuest] = useState<GuestInterface>({
+        name: '',
+        lastName: '',
+        civilAssistance: CivilAssistance.EMPTY,
+        partyAssistance: PartyAssistance.EMPTY,
+        menu: SpecialMenu.EMPTY,
+        song: '',
+    })
 
     const nameChange = (value: string): void => {
         setGuest(prevState => ({
@@ -113,13 +121,17 @@ const AssistanceForm: FC = (): ReactElement => {
         setTimeout(router.reload, 3000)
     }, [])
 
-    const onSubmit = (): void => {
+    useEffect(() => {
+        GuestsService.find().then(res => console.log(res))
+    }, [])
+
+    const onSubmit = useCallback(() => {
         if (
-            guest.name === '' ||
-            guest.lastName === '' ||
-            guest.civilAssistance === CivilAssistance.EMPTY ||
-            guest.partyAssistance === PartyAssistance.EMPTY ||
-            guest.menu === SpecialMenu.EMPTY
+            guest?.name !== '' &&
+            guest?.lastName !== '' &&
+            guest?.civilAssistance !== CivilAssistance.EMPTY &&
+            guest?.partyAssistance !== PartyAssistance.EMPTY &&
+            guest?.menu !== SpecialMenu.EMPTY
         ) {
             GuestsService.create(guest)
                 .then(() => {
@@ -127,11 +139,11 @@ const AssistanceForm: FC = (): ReactElement => {
                     sessionStorage.setItem('scrollToForm', 'true')
                     refetch()
                 })
-                .catch(() => addGuestMessage('error'))
+                .catch(() => console.log('err'))
         } else {
             addGuestMessage('error')
         }
-    }
+    }, [guest])
 
     return (
         <Container>
@@ -174,10 +186,10 @@ const AssistanceForm: FC = (): ReactElement => {
                     data={partyAssistanceData}
                 />
                 <InputItem
-                    label="Menu especial"
+                    label="Menu"
                     onChange={menuSelect}
                     select
-                    placeholder="Menu especial"
+                    placeholder="Selecciona tu menu"
                     data={specialMenu}
                 />
                 <InputItem
