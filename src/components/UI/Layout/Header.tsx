@@ -82,7 +82,7 @@ const Header: FC<HeaderProps> = ({
         { text: 'RSVP', index: 3, reference: rsvp },
         { text: 'NOSOTROS', index: 4, reference: gallery },
     ]
-    console.log(windowDimensions)
+
     return (
         <>
             <Container display={display}>

@@ -38,6 +38,7 @@ const A = styled.a`
     margin-left: auto;
     margin-right: auto;
     transition-duration: 0.25s, 0.25s, 0.25s, 0.25s;
+    border-radius: 0.4rem;
 
     display: flex;
     justify-content: center;
@@ -62,14 +63,20 @@ const Gifts: FC<GiftsProps> = ({ gifts }): ReactElement => {
         <>
             <PinkBackground reference={gifts} />
             <Container>
-                <PageTitle title="REGALOS" color={theme.colors.white.normal} />
+                <PageTitle
+                    title="REGALOS"
+                    color={theme.colors.white.normal}
+                    style={{
+                        marginTop: windowDimensions.height <= 667 ? 70 : 200,
+                    }}
+                />
                 <Typography
                     color={theme.colors.white.normal}
                     style={{
                         width: '60%',
                         margin: '70px',
                         marginBottom:
-                            windowDimensions.width >= 1024 ? '130px' : '40px',
+                            windowDimensions.width >= 1024 ? '40px' : '40px',
                         marginLeft: 'auto',
                         marginRight: 'auto',
                         marginTop:

@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import AppContext from 'src/contexts/AppContext'
 import styled from 'styled-components'
-import AssistanceForm from './Modals/AssistanceForm'
+import AssistanceForm from './UI/AssistanceForm'
 import FlowersBackground from './UI/FlowersBackground'
 import InstagramSection from './UI/InstagramSection'
 import PageTitle from './UI/PageTitle'
@@ -30,23 +30,23 @@ const Container = styled.div`
     }
 
     @media only screen and (max-width: 414px) and (max-height: 896px) {
-        height: 150vh;
+        height: 200vh;
     }
 
     @media only screen and (max-width: 412px) and (max-height: 915px) {
-        height: 150vh;
+        height: 200vh;
     }
 
     @media (max-width: 375px) {
-        height: 180vh;
+        height: 200vh;
     }
 
     @media (max-width: 375px) and (max-height: 812px) and (min-width: 375px) and (min-height: 812px) {
-        height: 140vh;
+        height: 200vh;
     }
 
     @media (max-width: 360px) and (max-height: 740px) {
-        height: 160vh;
+        height: 200vh;
     }
 `
 
@@ -55,7 +55,7 @@ const BottomContainer = styled.div`
     width: 78vw;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
+    margin-top: 45px;
     z-index: 2;
     position: relative;
 
@@ -130,7 +130,7 @@ const RSVP: FC<RSVPPRops> = ({ rsvp }): ReactElement => {
     }, [windowDimensions])
 
     return (
-        <Container ref={rsvp}>
+        <Container ref={rsvp} id="rsvp">
             <FlowersBackground />
             <PageTitle title="RSVP" />
             <BottomContainer>
