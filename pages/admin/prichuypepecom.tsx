@@ -8,8 +8,8 @@ import styled from 'styled-components'
 import CloseIcon from '@rsuite/icons/Close'
 import DeleteGuestModal from 'src/components/UI/DeleteGuestModal'
 import { useRouter } from 'next/router'
-import { deleteMessage } from 'src/components/UI/message'
 import GuestsFilter from 'src/components/UI/GuestsFilter'
+import { deleteMessage } from 'src/components/UI/message'
 
 const { Column, HeaderCell, Cell } = Table
 
@@ -68,7 +68,10 @@ const AdminPage = (): ReactElement => {
     useEffect(() => {
         setLoading(true)
         GuestsService.find()
-            .then(setGuests)
+            .then(res => {
+                setGuests(res)
+                setFilteredGuests(res)
+            })
             .catch(() => {
                 toaster.push(
                     <Message type="error">

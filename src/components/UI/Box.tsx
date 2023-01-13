@@ -1,6 +1,5 @@
-import React, { CSSProperties, FC, ReactElement, useContext } from 'react'
+import React, { CSSProperties, FC, ReactElement } from 'react'
 import styled from 'styled-components'
-import AppContext from '../../contexts/AppContext'
 
 const BoxContainer = styled.div`
     display: inline-block;

@@ -1,10 +1,4 @@
-import React, {
-    ReactElement,
-    useContext,
-    useEffect,
-    useRef,
-    useState,
-} from 'react'
+import React, { ReactElement, useContext, useEffect, useRef } from 'react'
 import AppContext from 'src/contexts/AppContext'
 import Events from './Events'
 import Gifts from './Gifts'
