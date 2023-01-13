@@ -62,19 +62,19 @@ const Container = styled.div`
     }
 
     @media (max-width: 425px) {
-        height: 270vh;
+        height: 200vh;
     }
 
     @media only screen and (max-width: 414px) and (max-height: 896px) {
-        height: 213vh;
+        height: 240vh;
     }
 
     @media only screen and (max-width: 412px) and (max-height: 915px) {
-        height: 230vh;
+        height: 240vh;
     }
 
     @media only screen and (max-width: 390px) and (max-height: 844px) {
-        height: 220vh;
+        height: 240vh;
     }
 
     @media (max-width: 375px) {
@@ -97,43 +97,57 @@ const Container = styled.div`
 const BoxTitleContainer = styled.div`
     width: 100%;
     height: 40px;
-    background: ${theme.colors.pink};
+    // background: ${theme.colors.pink};
     display: flex;
     justify-content: center;
     align-items: center;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
+    margin-top: 10px;
 `
 
 const Img = styled.img`
-    width: 300px;
+    width: 190px;
     border-radius: 50%;
+`
+
+const ImgContainer = styled.div`
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+    margin-bottom: 20px;
 `
 
 const locationConfig = [
     {
         title: 'Civil',
         path: 'https://goo.gl/maps/BuyvMjWG9fcuetES7',
-        img: '/images/registro-civil.png',
-        address: 'Moreno 305, San Isidro',
-        name: 'Registro Civil',
-        date: 'Jueves 16 de febrero, 14:30 hs',
+        img: '/images/heart-test.png',
+        address: 'Moreno 305',
+        location: 'San Isidro',
+        name: 'Registro Civil San Isidro',
+        date: '16 FEB 2023 14:30 hs',
+        marginText: 'Seguimos en Casa Catedral hasta las 00 hs',
     },
     {
         title: 'Ceremonia',
         path: 'https://goo.gl/maps/hfeVJ26sVMSW6KRv8',
         img: '/images/capilla-marin.png',
-        address: 'Av. del Libertador 17115, 1643 Béccar',
+        address: 'Libertador 17115',
+        location: 'Béccar',
         name: 'Capilla del Colegio Marin',
-        date: 'Sabado 25 de febrero, 15:30 hs',
+        date: '25 FEB 2023 15:30 hs',
     },
     {
         title: 'Fiesta',
         path: 'https://goo.gl/maps/mpc6NxaBZ7pQ8ikd9',
         img: '/images/quinta-anchorena.png',
-        address: 'Anchorena 477, San Isidro',
+        address: 'Anchorena 477',
+        location: 'San Isidro',
         name: 'Quinta de Anchorena',
-        date: 'Sabado 25 de febrero, 17:00 hs',
+        date: '25 FEB 2023 17:00 hs',
     },
 ]
 
@@ -153,46 +167,45 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
                         <Box>
                             <BoxTitleContainer>
                                 <Typography
-                                    color={theme.colors.white.normal}
+                                    variant="bannerTitle"
+                                    color={theme.colors.pink}
                                     style={{
                                         width: 'fit-content',
-                                        fontSize: 15,
-                                        fontWeight: 700,
+                                        fontSize: 20,
+                                        letterSpacing: '5px',
+                                        fontWeight: 1000,
+                                        marginTop: '15px',
                                     }}
                                 >
                                     {location.title.toUpperCase()}
                                 </Typography>
                             </BoxTitleContainer>
-                            <a
-                                href={location.path}
-                                target="_blank"
-                                rel="noreferrer"
+                            <Typography
+                                style={{
+                                    fontSize: '13px',
+                                    fontWeight: 1000,
+                                    marginLeft: 'auto',
+                                    marginRight: 'auto',
+                                    marginTop: '5px',
+                                    width: '90px',
+                                    textAlign: 'center',
+                                }}
                             >
-                                <Img src={location.img} alt={location.path} />
-                            </a>
+                                {location.date.toUpperCase()}
+                            </Typography>
+                            <ImgContainer>
+                                <a
+                                    href={location.path}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <Img
+                                        src={location.img}
+                                        alt={location.path}
+                                    />
+                                </a>
+                            </ImgContainer>
                             <div style={{ marginTop: 10, marginBottom: 10 }}>
-                                <Typography
-                                    style={{
-                                        width: 'fit-content',
-                                        fontSize: '13px',
-                                        fontWeight: 500,
-                                        marginLeft: 'auto',
-                                        marginRight: 'auto',
-                                    }}
-                                >
-                                    {location.address.toUpperCase()}
-                                </Typography>
-                                <Typography
-                                    style={{
-                                        width: 'fit-content',
-                                        fontSize: '13px',
-                                        fontWeight: 500,
-                                        marginLeft: 'auto',
-                                        marginRight: 'auto',
-                                    }}
-                                >
-                                    {location.name.toUpperCase()}
-                                </Typography>
                                 <Typography
                                     style={{
                                         width: 'fit-content',
@@ -202,8 +215,49 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
                                         marginRight: 'auto',
                                     }}
                                 >
-                                    {location.date.toUpperCase()}
+                                    {location.name.toUpperCase()}
                                 </Typography>
+                                <Typography
+                                    style={{
+                                        fontSize: '13px',
+                                        fontWeight: 500,
+                                        marginLeft: 'auto',
+                                        marginRight: 'auto',
+                                        width: '125px',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    {location.address.toUpperCase()}
+                                </Typography>
+                                <Typography
+                                    style={{
+                                        fontSize: '13px',
+                                        fontWeight: 500,
+                                        marginLeft: 'auto',
+                                        marginRight: 'auto',
+                                        width: '125px',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    {location.location.toUpperCase()}
+                                </Typography>
+                                {location.marginText && (
+                                    <Typography
+                                        style={{
+                                            fontSize: '13px',
+                                            fontWeight: 500,
+                                            width: 'fit-content',
+                                            textAlign: 'center',
+                                            color: 'black',
+                                            position: 'absolute',
+                                            marginTop: '15px',
+                                            marginLeft: '10px',
+                                            opacity: 0.6,
+                                        }}
+                                    >
+                                        {location.marginText}
+                                    </Typography>
+                                )}
                             </div>
                         </Box>
                     )

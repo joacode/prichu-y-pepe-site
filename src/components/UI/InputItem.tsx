@@ -1,8 +1,7 @@
-import React, { CSSProperties, FC, ReactElement, useContext } from 'react'
+import React, { CSSProperties, FC, ReactElement } from 'react'
 import styled from 'styled-components'
 import { Input as RSInput, SelectPicker as RSSelectPicker } from 'rsuite'
 import { theme } from 'styles/theme'
-import AppContext from '../../contexts/AppContext'
 import Typography from './Typography'
 
 const Input = styled(RSInput)`

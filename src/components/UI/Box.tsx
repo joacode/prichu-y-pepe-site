@@ -1,18 +1,20 @@
-import React, { CSSProperties, FC, ReactElement, useContext } from 'react'
+import React, { CSSProperties, FC, ReactElement } from 'react'
 import styled from 'styled-components'
-import AppContext from '../../contexts/AppContext'
 
 const BoxContainer = styled.div`
-    display: inline-grid;
+    display: inline-block;
     background: white;
-    border-radius: 0.25rem;
+    background: transparent;
+    border-radius: 0.6rem;
     align-items: center;
     margin: 40px;
-    max-width: fit-content;
-    height: fit-content;
+    margin-top: 10px;
     box-shadow: 0px 5px 8px rgb(0 0 0 / 30%);
     z-index: 2;
     position: relative;
+
+    width: 300px;
+    height: 415px;
 
     @media (max-width: 425px) {
         margin-left: 0px;

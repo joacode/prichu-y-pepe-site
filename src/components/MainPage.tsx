@@ -1,10 +1,4 @@
-import React, {
-    ReactElement,
-    useContext,
-    useEffect,
-    useRef,
-    useState,
-} from 'react'
+import React, { ReactElement, useContext, useEffect, useRef } from 'react'
 import AppContext from 'src/contexts/AppContext'
 import Events from './Events'
 import Gifts from './Gifts'
@@ -14,8 +8,7 @@ import Gallery from './Gallery'
 import Header from './UI/Layout/Header'
 
 const MainPage = (): ReactElement => {
-    const { windowDimensions } = useContext(AppContext)
-    const [offset, setOffset] = useState(0)
+    const { windowDimensions, scrollOffset } = useContext(AppContext)
 
     const banner = useRef(null)
     const events = useRef(null)
@@ -30,11 +23,13 @@ const MainPage = (): ReactElement => {
     }
 
     useEffect(() => {
-        const onScroll = (): void => setOffset(window.pageYOffset)
-        window.removeEventListener('scroll', onScroll)
-        window.addEventListener('scroll', onScroll, { passive: true })
-        return (): void => window.removeEventListener('scroll', onScroll)
-    }, [])
+        const sc = sessionStorage.getItem('scrollToForm')
+
+        if (sc === 'true') {
+            handleScroll(rsvp)
+            sessionStorage.setItem('scrollToForm', '')
+        }
+    }, [rsvp])
 
     return (
         <div>
@@ -45,7 +40,7 @@ const MainPage = (): ReactElement => {
                 rsvp={rsvp}
                 gallery={gallery}
                 handleScroll={handleScroll}
-                display={offset > windowDimensions.height - 1}
+                display={scrollOffset > windowDimensions.height - 1}
             />
             <Banner banner={banner} />
             <Events events={events} />

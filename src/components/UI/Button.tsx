@@ -1,13 +1,6 @@
-import React, {
-    CSSProperties,
-    FC,
-    ReactElement,
-    ReactNode,
-    useContext,
-} from 'react'
+import React, { CSSProperties, FC, ReactElement, ReactNode } from 'react'
 import { Button as RSuiteButton } from 'rsuite'
 import styled from 'styled-components'
-import AppContext from '../../contexts/AppContext'
 
 interface ButtonProps {
     children: ReactNode
@@ -36,15 +29,12 @@ const Button: FC<ButtonProps> = ({
     children,
     color,
 }): ReactElement => {
-    const { maxResolutionQuery } = useContext(AppContext)
-
     return (
         <StyledButton
             appearance={appearance}
             style={style}
             color={color}
             onClick={onClick}
-            maxWidth={`${maxResolutionQuery}px`}
         >
             {children}
         </StyledButton>

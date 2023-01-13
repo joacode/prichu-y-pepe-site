@@ -32,8 +32,8 @@ export const GuestsService = {
     //     return data
     // },
 
-    // delete: async (id: number): Promise<RecordInterface> => {
-    //     const { data } = await apiClient.delete(`${path}/${id}`)
-    //     return data
-    // },
+    delete: async (id: number): Promise<GuestInterface> => {
+        const { data } = await apiClient.delete(`${path}/${id}`)
+        return data
+    },
 }

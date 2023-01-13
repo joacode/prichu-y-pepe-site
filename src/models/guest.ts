@@ -1,19 +1,31 @@
 import mongoose, { Schema, Model } from 'mongoose'
+import { CivilAssistance, PartyAssistance } from './assistance'
 import { SpecialMenu } from './specialMenu'
 
 export interface GuestInterface {
     name: string
     lastName: string
-    assistance: boolean
+    civilAssistance: CivilAssistance
+    partyAssistance: PartyAssistance
     menu: SpecialMenu
     song: string
 }
 
+export interface GuestFilter {
+    name?: string
+    lastName?: string
+    civilAssistance?: CivilAssistance
+    partyAssistance?: PartyAssistance
+    menu?: SpecialMenu
+    song?: string
+}
+
 const guestSchema = new Schema<GuestInterface>({
     name: { type: String, required: true },
-    lastName: { type: String },
-    assistance: { type: Boolean },
-    menu: ['VEGGIE', 'VEGAN', 'COELIAC', 'DEFAULT'],
+    lastName: { type: String, required: true },
+    civilAssistance: ['ALL', 'CEREMONY', 'PARTY', 'DONT', 'EMPTY'],
+    partyAssistance: ['ALL', 'CEREMONY', 'DONT', 'EMPTY'],
+    menu: ['VEGGIE', 'VEGAN', 'COELIAC', 'DEFAULT', 'EMPTY'],
     song: { type: String },
 })
 

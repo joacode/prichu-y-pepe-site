@@ -3,4 +3,5 @@ export enum SpecialMenu {
     VEGAN = 'VEGAN',
     COELIAC = 'COELIAC',
     DEFAULT = 'DEFAULT',
+    EMPTY = 'EMPTY',
 }

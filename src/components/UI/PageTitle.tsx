@@ -13,12 +13,17 @@ const TitleContainer = styled.div`
 interface PageTitleProps {
     title: string
     color?: CSSProperties['color']
+    style?: CSSProperties
 }
 
-const PageTitle: FC<PageTitleProps> = ({ color, title }): ReactElement => {
+const PageTitle: FC<PageTitleProps> = ({
+    color,
+    title,
+    style,
+}): ReactElement => {
     return (
         <div style={{ zIndex: 1, position: 'relative' }}>
-            <TitleContainer>
+            <TitleContainer style={style}>
                 <Typography color={color}>{title}</Typography>
             </TitleContainer>
             <Divider
@@ -36,4 +41,5 @@ export default PageTitle
 
 PageTitle.defaultProps = {
     color: theme.colors.black,
+    style: {},
 }

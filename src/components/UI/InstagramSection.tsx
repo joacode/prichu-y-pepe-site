@@ -22,10 +22,16 @@ const A = styled.a`
     }
 `
 
+const Container = styled.div`
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+`
+
 const InstagramSection = (): ReactElement => {
     const { windowDimensions } = useContext(AppContext)
     return (
-        <div style={{ width: '100%' }}>
+        <Container>
             <ImgContainer>
                 <A
                     href="https://www.instagram.com/prichuypepe/"
@@ -77,11 +83,11 @@ const InstagramSection = (): ReactElement => {
                         marginRight: 'auto',
                     }}
                 >
-                    Compartamos juntos este momento! Seguinos en Instagram y
-                    empezá a subir tus fotos a nuestro hashtag.
+                    ¡Compartamos juntos este momento! Seguinos en Instagram y
+                    subí tus fotos con nuestro hashtag.
                 </Typography>
             </div>
-        </div>
+        </Container>
     )
 }
 

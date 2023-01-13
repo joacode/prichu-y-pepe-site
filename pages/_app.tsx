@@ -14,6 +14,8 @@ export default function MyApp(props): ReactElement {
         width: 320,
         height: 669,
     })
+    const [scrollOffset, setScrollOffset] = useState(0)
+    const [auth, setAuth] = useState(false)
 
     useEffect(() => {
         const { innerWidth: width, innerHeight: height } = window
@@ -21,6 +23,13 @@ export default function MyApp(props): ReactElement {
             width,
             height,
         })
+    }, [])
+
+    useEffect(() => {
+        const onScroll = (): void => setScrollOffset(window.pageYOffset)
+        window.removeEventListener('scroll', onScroll)
+        window.addEventListener('scroll', onScroll, { passive: true })
+        return (): void => window.removeEventListener('scroll', onScroll)
     }, [])
 
     return (
@@ -31,6 +40,10 @@ export default function MyApp(props): ReactElement {
             <AppContext.Provider
                 value={{
                     windowDimensions,
+                    scrollOffset,
+                    setScrollOffset,
+                    auth,
+                    setAuth,
                 }}
             >
                 <Component {...pageProps} />

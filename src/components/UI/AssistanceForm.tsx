@@ -9,11 +9,13 @@ import styled from 'styled-components'
 import { theme } from 'styles/theme'
 import { SpecialMenu } from 'src/models/specialMenu'
 import { useRouter } from 'next/router'
-import Button from '../UI/Button'
-import InputItem from '../UI/InputItem'
+import { CivilAssistance, PartyAssistance } from 'src/models/assistance'
+import { GuestsService } from 'src/services/guestsService'
+import Button from './Button'
+import InputItem from './InputItem'
 import { GuestInterface } from '../../models/guest'
 import AppContext from '../../contexts/AppContext'
-import { addGuestMessage } from '../UI/message'
+import { addGuestMessage } from './message'
 
 const Container = styled.div`
     width: 100%;
@@ -31,15 +33,27 @@ const UpperContainer = styled.div`
     justify-content: space-between;
 `
 
-const assistanceData = [
-    { label: 'Civil y Fiesta!', value: 'true' },
-    { label: 'Solo Civil', value: 'true' },
-    { label: 'Solo Fiesta', value: 'true' },
-    { label: 'No.', value: 'false' },
+const civilAssistanceData = [
+    {
+        label: 'Voy a la ceremonia y al festejo',
+        value: CivilAssistance.ALL,
+    },
+    { label: 'Voy solo a la ceremonia', value: CivilAssistance.CEREMONY },
+    { label: 'Voy solo al festejo', value: CivilAssistance.PARTY },
+    { label: 'No voy a poder ir', value: CivilAssistance.DONT },
+]
+
+const partyAssistanceData = [
+    {
+        label: 'Voy a la ceremonia y al festejo',
+        value: PartyAssistance.ALL,
+    },
+    { label: 'Voy solo a la ceremonia', value: PartyAssistance.CEREMONY },
+    { label: 'No voy a poder ir', value: PartyAssistance.DONT },
 ]
 
 const specialMenu = [
-    { label: 'Como de todo!', value: SpecialMenu.DEFAULT },
+    { label: '¡Como de todo!', value: SpecialMenu.DEFAULT },
     { label: 'Sin TACC', value: SpecialMenu.COELIAC },
     { label: 'Go Vegan!', value: SpecialMenu.VEGAN },
     { label: 'Veggie Baby', value: SpecialMenu.VEGGIE },
@@ -48,7 +62,14 @@ const specialMenu = [
 const AssistanceForm: FC = (): ReactElement => {
     const router = useRouter()
     const { windowDimensions } = useContext(AppContext)
-    const [guest, setGuest] = useState<GuestInterface>()
+    const [guest, setGuest] = useState<GuestInterface>({
+        name: '',
+        lastName: '',
+        civilAssistance: CivilAssistance.EMPTY,
+        partyAssistance: PartyAssistance.EMPTY,
+        menu: SpecialMenu.EMPTY,
+        song: '',
+    })
 
     const nameChange = (value: string): void => {
         setGuest(prevState => ({
@@ -64,19 +85,18 @@ const AssistanceForm: FC = (): ReactElement => {
         }))
     }
 
-    const assistanceChange = (value: string): void => {
-        setGuest(prevState => {
-            if (value === 'true') {
-                return {
-                    ...prevState,
-                    assistance: true,
-                }
-            }
-            return {
-                ...prevState,
-                assistance: false,
-            }
-        })
+    const civilAssistanceChange = (value: CivilAssistance): void => {
+        setGuest(prevState => ({
+            ...prevState,
+            civilAssistance: value,
+        }))
+    }
+
+    const partyAssistanceChange = (value: PartyAssistance): void => {
+        setGuest(prevState => ({
+            ...prevState,
+            partyAssistance: value,
+        }))
     }
 
     const menuSelect = (value: SpecialMenu): void => {
@@ -97,24 +117,33 @@ const AssistanceForm: FC = (): ReactElement => {
         setTimeout(router.reload, 3000)
     }, [])
 
-    const onSubmit = (): void => {
-        addGuestMessage('success')
-        // refetch()
-        setGuest({
-            name: '',
-            lastName: '',
-            assistance: true,
-            menu: SpecialMenu.DEFAULT,
-            song: '',
-        })
-    }
+    const onSubmit = useCallback(() => {
+        if (
+            guest?.name !== '' &&
+            guest?.lastName !== '' &&
+            guest?.civilAssistance !== CivilAssistance.EMPTY &&
+            guest?.partyAssistance !== PartyAssistance.EMPTY &&
+            guest?.menu !== SpecialMenu.EMPTY
+        ) {
+            GuestsService.create(guest)
+                .then(() => {
+                    addGuestMessage('success')
+                    sessionStorage.setItem('scrollToForm', 'true')
+                    refetch()
+                })
+                .catch(() => addGuestMessage('error'))
+        } else {
+            addGuestMessage('error')
+        }
+    }, [guest])
 
     return (
         <Container>
             <UpperContainer>
                 <InputItem
-                    label="Tu nombre:"
+                    label="Tu nombre"
                     onChange={nameChange}
+                    defaultValue={guest?.name || ''}
                     placeholder={
                         windowDimensions.width <= 485 ||
                         windowDimensions.width > 768
@@ -123,7 +152,7 @@ const AssistanceForm: FC = (): ReactElement => {
                     }
                 />
                 <InputItem
-                    label="Tu apellido:"
+                    label="Tu apellido"
                     onChange={lastNameChange}
                     placeholder={
                         windowDimensions.width <= 485 ||
@@ -135,23 +164,30 @@ const AssistanceForm: FC = (): ReactElement => {
             </UpperContainer>
             <div>
                 <InputItem
-                    label="Una cancion que no pueda faltar:"
-                    onChange={songChange}
-                    placeholder="Cancion"
-                />
-                <InputItem
-                    label="Asistencia:"
-                    onChange={assistanceChange}
+                    label="Confirmar asistencia al Civil"
+                    onChange={civilAssistanceChange}
                     select
-                    placeholder="Asistencia"
-                    data={assistanceData}
+                    placeholder="Asistencia 16 de Febrero"
+                    data={civilAssistanceData}
                 />
                 <InputItem
-                    label="Menu especial:"
+                    label="Confirmar asistencia a la Iglesia y Fiesta"
+                    onChange={partyAssistanceChange}
+                    select
+                    placeholder="Asistencia 25 de Febrero"
+                    data={partyAssistanceData}
+                />
+                <InputItem
+                    label="Menu"
                     onChange={menuSelect}
                     select
-                    placeholder="Menu especial"
+                    placeholder="Selecciona tu menu"
                     data={specialMenu}
+                />
+                <InputItem
+                    label="Una canción que no puede faltar en la pista"
+                    onChange={songChange}
+                    placeholder="Menea para mi - Damas Gratis"
                 />
             </div>
             <div style={{ padding: 15 }}>
