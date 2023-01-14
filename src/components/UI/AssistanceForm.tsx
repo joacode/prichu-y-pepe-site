@@ -11,6 +11,7 @@ import { SpecialMenu } from 'src/models/specialMenu'
 import { useRouter } from 'next/router'
 import { CivilAssistance, PartyAssistance } from 'src/models/assistance'
 import { GuestsService } from 'src/services/guestsService'
+import capitalize from 'lodash/capitalize'
 import Button from './Button'
 import InputItem from './InputItem'
 import { GuestInterface } from '../../models/guest'
@@ -74,14 +75,14 @@ const AssistanceForm: FC = (): ReactElement => {
     const nameChange = (value: string): void => {
         setGuest(prevState => ({
             ...prevState,
-            name: value,
+            name: capitalize(value),
         }))
     }
 
     const lastNameChange = (value: string): void => {
         setGuest(prevState => ({
             ...prevState,
-            lastName: value,
+            lastName: capitalize(value),
         }))
     }
 
@@ -125,7 +126,7 @@ const AssistanceForm: FC = (): ReactElement => {
             guest?.partyAssistance !== PartyAssistance.EMPTY &&
             guest?.menu !== SpecialMenu.EMPTY
         ) {
-            GuestsService.create(guest)
+            GuestsService.create({ ...guest, active: true })
                 .then(() => {
                     addGuestMessage('success')
                     sessionStorage.setItem('scrollToForm', 'true')
