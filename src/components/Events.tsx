@@ -87,6 +87,7 @@ const locationConfig = [
         name: 'Registro Civil San Isidro',
         date: '16 FEB 2023 14:15 hs',
         marginText: '*Festejo en Casa Catedral hasta las 00 hs',
+        containerStyle: { marginBottom: '90px' },
     },
     {
         title: 'Ceremonia',
@@ -124,7 +125,7 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
             <Grid style={{ zIndex: 1 }}>
                 {locationConfig.map(location => {
                     return (
-                        <Box>
+                        <Box style={location?.containerStyle}>
                             <BoxTitleContainer>
                                 <Typography
                                     variant="bannerTitle"
