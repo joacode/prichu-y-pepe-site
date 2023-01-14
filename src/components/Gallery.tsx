@@ -62,10 +62,10 @@ interface GalleryProps {
 }
 
 const imgConfig = [
-    'IMG_0005.jpg',
-    'IMG_0001.jpg',
-    'IMG_0002.jpg',
-    'IMG_0003.jpg',
+    'IMG_0005.jpeg',
+    'IMG_0001.jpeg',
+    'IMG_0002.jpeg',
+    'IMG_0003.jpeg',
     'IMG_0030.jpeg',
     'IMG_0374.jpeg',
     'IMG_0411.jpeg',
