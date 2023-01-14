@@ -63,6 +63,7 @@ const specialMenu = [
 const AssistanceForm: FC = (): ReactElement => {
     const router = useRouter()
     const { windowDimensions } = useContext(AppContext)
+    const [loading, setLoading] = useState(false)
     const [guest, setGuest] = useState<GuestInterface>({
         name: '',
         lastName: '',
@@ -126,6 +127,7 @@ const AssistanceForm: FC = (): ReactElement => {
             guest?.partyAssistance !== PartyAssistance.EMPTY &&
             guest?.menu !== SpecialMenu.EMPTY
         ) {
+            setLoading(true)
             GuestsService.create({ ...guest, active: true })
                 .then(() => {
                     addGuestMessage('success')
@@ -133,6 +135,7 @@ const AssistanceForm: FC = (): ReactElement => {
                     refetch()
                 })
                 .catch(() => addGuestMessage('error'))
+                .finally(() => setLoading(false))
         } else {
             addGuestMessage('error')
         }
@@ -198,6 +201,7 @@ const AssistanceForm: FC = (): ReactElement => {
                         background: theme.colors.pink,
                     }}
                     onClick={onSubmit}
+                    loading={loading}
                 >
                     ENVIAR
                 </Button>

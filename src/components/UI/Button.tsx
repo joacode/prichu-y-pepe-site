@@ -8,6 +8,7 @@ interface ButtonProps {
     style?: CSSProperties
     appearance: 'default' | 'primary' | 'link' | 'subtle' | 'ghost'
     color?: 'red' | 'orange' | 'yellow' | 'green' | 'cyan' | 'blue' | 'violet'
+    loading?: boolean
 }
 
 interface StyledButtonProps {
@@ -28,6 +29,7 @@ const Button: FC<ButtonProps> = ({
     appearance,
     children,
     color,
+    loading,
 }): ReactElement => {
     return (
         <StyledButton
@@ -35,6 +37,7 @@ const Button: FC<ButtonProps> = ({
             style={style}
             color={color}
             onClick={onClick}
+            loading={loading}
         >
             {children}
         </StyledButton>
@@ -46,4 +49,5 @@ export default Button
 Button.defaultProps = {
     style: null,
     color: 'blue',
+    loading: false,
 }
