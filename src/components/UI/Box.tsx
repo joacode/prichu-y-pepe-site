@@ -35,11 +35,8 @@ const Box: FC<Props> = ({
     lessPadding,
     fullWidth,
 }): ReactElement => {
-    // const { maxResolutionQuery } = useContext(AppContext)
-
     return (
         <BoxContainer
-            // maxWidth={`${maxResolutionQuery}px`}
             style={style}
             lessPadding={lessPadding}
             fullWidth={fullWidth}

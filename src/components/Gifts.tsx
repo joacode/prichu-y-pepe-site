@@ -73,6 +73,7 @@ const Gifts: FC<GiftsProps> = ({ gifts }): ReactElement => {
                     color={theme.colors.white.normal}
                     style={{
                         width: '60%',
+                        maxWidth: '667px',
                         margin: '70px',
                         marginBottom:
                             windowDimensions.width >= 1024 ? '40px' : '40px',
@@ -86,9 +87,8 @@ const Gifts: FC<GiftsProps> = ({ gifts }): ReactElement => {
                         fontWeight: 400,
                     }}
                 >
-                    Que hayas decidido compartir este momento con nosotros es
-                    más que suficiente, pero si querés hacernos un regalo, te
-                    dejamos el link a nuestra lista.
+                    Compartir este momento con vos es el mejor regalo. Gracias
+                    por acompañarnos.
                 </Typography>
                 <A
                     href="https://confites.com/pareja/prichuypepe/regalar"
