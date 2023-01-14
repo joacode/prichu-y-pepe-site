@@ -15,7 +15,6 @@ export default function MyApp(props): ReactElement {
         height: 669,
     })
     const [scrollOffset, setScrollOffset] = useState(0)
-    const [auth, setAuth] = useState(false)
 
     useEffect(() => {
         const { innerWidth: width, innerHeight: height } = window
@@ -42,8 +41,6 @@ export default function MyApp(props): ReactElement {
                     windowDimensions,
                     scrollOffset,
                     setScrollOffset,
-                    auth,
-                    setAuth,
                 }}
             >
                 <Component {...pageProps} />
