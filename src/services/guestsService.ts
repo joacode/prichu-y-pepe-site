@@ -14,21 +14,15 @@ export const GuestsService = {
         return data
     },
 
-    // findById: async (id: string | string[]): Promise<RecordInterface> => {
-    //     const { data } = await apiClient.get(`${path}/${id}`)
-    //     return data
-    // },
-
     create: async (guest: GuestInterface): Promise<GuestInterface> => {
         const { data } = await apiClient.post(path, guest)
         return data
     },
 
-    // update: async (
-    //     record: RecordUpdateRequest
-    // ): Promise<RecordUpdateRequest> => {
+    // THIS SERVICE MAKES A SOFT DELETE. ACTIVATE THE ONE BELOW TO DELETE PERMANENTLY FROM DB
+    // delete: async (guest: GuestUpdateRequest): Promise<GuestUpdateRequest> => {
     //     // eslint-disable-next-line no-underscore-dangle
-    //     const { data } = await apiClient.put(`${path}/${record._id}`, record)
+    //     const { data } = await apiClient.put(`${path}/${guest._id}`, guest)
     //     return data
     // },
 

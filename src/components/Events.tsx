@@ -38,66 +38,17 @@ const Container = styled.div`
     height: 100vh;
 
     @media (max-width: 1149px) {
-        height: 250vh;
+        height: 963px;
     }
 
-    @media only screen and (max-width: 1024px) and (max-height: 1366px) and (min-width: 1024px) and (min-height: 1366px) {
-        height: 130vh;
-    }
-
-    @media only screen and (max-width: 912px) and (max-height: 1368px) and (min-width: 912px) and (min-height: 1368px) {
-        height: 130vh;
-    }
-
-    @media only screen and (max-width: 820px) and (max-height: 1180px) and (min-width: 820px) and (min-height: 1180px) {
-        height: 160vh;
-    }
-
-    @media (max-width: 768px) {
-        height: 280vh;
-    }
-
-    @media only screen and (max-width: 768px) and (max-height: 1024px) and (min-width: 768px) and (min-height: 1024px) {
-        height: 180vh;
-    }
-
-    @media (max-width: 425px) {
-        height: 200vh;
-    }
-
-    @media only screen and (max-width: 414px) and (max-height: 896px) {
-        height: 240vh;
-    }
-
-    @media only screen and (max-width: 412px) and (max-height: 915px) {
-        height: 240vh;
-    }
-
-    @media only screen and (max-width: 390px) and (max-height: 844px) {
-        height: 240vh;
-    }
-
-    @media (max-width: 375px) {
-        height: 270vh;
-    }
-
-    @media (max-width: 375px) and (max-height: 812px) and (min-width: 375px) and (min-height: 812px) {
-        height: 215vh;
-    }
-
-    @media only screen and (max-width: 360px) and (max-height: 740px) {
-        height: 230vh;
-    }
-
-    @media only screen and (max-width: 360px) and (max-height: 640px) {
-        height: 270vh;
+    @media (max-width: 1149px) {
+        height: 1840px;
     }
 `
 
 const BoxTitleContainer = styled.div`
     width: 100%;
     height: 40px;
-    // background: ${theme.colors.pink};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -107,43 +58,52 @@ const BoxTitleContainer = styled.div`
 `
 
 const Img = styled.img`
-    width: 190px;
+    width: 160px;
     border-radius: 50%;
+    margin-top: -10px;
+    margin-bottom: -10px;
 `
 
 const ImgContainer = styled.div`
-    display: flex;
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
-    margin-top: 8px;
-    margin-bottom: 20px;
+    width: 170px;
+    height: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -20px;
+    margin-bottom: -10px;
 `
 
 const locationConfig = [
     {
         title: 'Civil',
         path: 'https://goo.gl/maps/BuyvMjWG9fcuetES7',
+        dressCode: 'Smart Casual',
         img: '/images/heart-test.png',
         address: 'Moreno 305',
         location: 'San Isidro',
         name: 'Registro Civil San Isidro',
-        date: '16 FEB 2023 14:30 hs',
-        marginText: 'Seguimos en Casa Catedral hasta las 00 hs',
+        date: '16 FEB 2023 14:15 hs',
+        marginText: '*Festejo en Casa Catedral hasta las 00 hs',
     },
     {
         title: 'Ceremonia',
         path: 'https://goo.gl/maps/hfeVJ26sVMSW6KRv8',
-        img: '/images/capilla-marin.png',
+        dressCode: 'Elegante',
+        img: '/images/rings.png',
         address: 'Libertador 17115',
         location: 'Béccar',
         name: 'Capilla del Colegio Marin',
         date: '25 FEB 2023 15:30 hs',
+        style: { width: '180px' },
     },
     {
         title: 'Fiesta',
         path: 'https://goo.gl/maps/mpc6NxaBZ7pQ8ikd9',
-        img: '/images/quinta-anchorena.png',
+        dressCode: 'Elegante',
+        img: '/images/partytest.png',
         address: 'Anchorena 477',
         location: 'San Isidro',
         name: 'Quinta de Anchorena',
@@ -186,26 +146,34 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
                                     fontWeight: 1000,
                                     marginLeft: 'auto',
                                     marginRight: 'auto',
-                                    marginTop: '5px',
+                                    marginTop: '10px',
                                     width: '90px',
                                     textAlign: 'center',
                                 }}
                             >
                                 {location.date.toUpperCase()}
                             </Typography>
+                            <Typography
+                                style={{
+                                    fontSize: '13px',
+                                    fontWeight: 500,
+                                    marginLeft: 'auto',
+                                    marginRight: 'auto',
+                                    marginTop: '10px',
+                                    width: 'fit-content',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                {`DRESS CODE: ${location.dressCode.toUpperCase()}`}
+                            </Typography>
                             <ImgContainer>
-                                <a
-                                    href={location.path}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <Img
-                                        src={location.img}
-                                        alt={location.path}
-                                    />
-                                </a>
+                                <Img
+                                    src={location.img}
+                                    alt={location.path}
+                                    style={location?.style}
+                                />
                             </ImgContainer>
-                            <div style={{ marginTop: 10, marginBottom: 10 }}>
+                            <div style={{ marginBottom: 10 }}>
                                 <Typography
                                     style={{
                                         width: 'fit-content',
@@ -223,6 +191,7 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
                                         fontWeight: 500,
                                         marginLeft: 'auto',
                                         marginRight: 'auto',
+                                        marginTop: '10px',
                                         width: '125px',
                                         textAlign: 'center',
                                     }}
@@ -241,6 +210,26 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
                                 >
                                     {location.location.toUpperCase()}
                                 </Typography>
+                                <a
+                                    href={location.path}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <Typography
+                                        style={{
+                                            width: 'fit-content',
+                                            fontSize: '13px',
+                                            fontWeight: 800,
+                                            marginLeft: 'auto',
+                                            marginRight: 'auto',
+                                            borderBottom: '1px solid',
+                                            marginTop: 15,
+                                        }}
+                                    >
+                                        VER MAPA
+                                    </Typography>
+                                </a>
                                 {location.marginText && (
                                     <Typography
                                         style={{
@@ -250,7 +239,7 @@ const Events: FC<EventsProps> = ({ events }): ReactElement => {
                                             textAlign: 'center',
                                             color: 'black',
                                             position: 'absolute',
-                                            marginTop: '15px',
+                                            marginTop: '26px',
                                             marginLeft: '10px',
                                             opacity: 0.6,
                                         }}

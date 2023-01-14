@@ -1,82 +1,31 @@
 import React, { FC, ReactElement, useState } from 'react'
-import { Input as RSInput } from 'rsuite'
 import styled from 'styled-components'
-import noop from 'lodash/noop'
 import { CivilAssistance, PartyAssistance } from 'src/models/assistance'
 import { SpecialMenu } from 'src/models/specialMenu'
+import { useRouter } from 'next/router'
+import capitalize from 'lodash/capitalize'
+import { theme } from 'styles/theme'
 import Button from './Button'
 import { GuestFilter, GuestInterface } from '../../models/guest'
 import InputItem from './InputItem'
 
-interface Props {
-    maxWidth?: string
-    popUp?: boolean
-}
+const StyledButton = styled(Button)`
+    width: 100px;
+    margin-bottom: 10px !important;
+`
 
 const Container = styled.div`
     margin: 10px;
     display: inline-block;
 `
 
-const FilterContainer = styled.div<Props>`
-    display: inherit;
-    position: ${(props): string => {
-        if (props?.popUp) {
-            return 'absolute'
-        }
-    }};
-    background: ${(props): string => {
-        if (props?.popUp) {
-            return 'white'
-        }
-    }};
-    z-index: ${(props): number => {
-        if (props?.popUp) {
-            return 10
-        }
-    }};
-    width: ${(props): string => {
-        if (props?.popUp) {
-            return 'min-content'
-        }
-    }};
-    border: ${(props): string => {
-        if (props?.popUp) {
-            return '1px solid #045cb5'
-        }
-    }};
-    border-radius: ${(props): string => {
-        if (props?.popUp) {
-            return '10px'
-        }
-    }};
-    padding: ${(props): string => {
-        if (props?.popUp) {
-            return '10px 20px'
-        }
-    }};
-
-    @media (max-width: ${(props): string => props?.maxWidth}) {
-        display: block;
-    }
-`
-
-const Input = styled(RSInput)<Props>`
-    width: 100px;
-    display: inline-block;
-
-    @media (max-width: ${(props): string => props?.maxWidth}) {
-        display: flex;
-        width: 100%;
-    }
+const FilterContainer = styled.div`
+    display: flex;
 `
 
 interface GuestsFilterProps {
-    guests: GuestInterface[]
     filteredGuests: GuestInterface[]
     setfilteredGuests: (g: GuestInterface[]) => void
-    popUp?: boolean
-    setOpenPopUp?: (p: boolean) => void
 }
 
 const civilAssistanceData = [
@@ -106,20 +55,18 @@ const specialMenu = [
 ]
 
 const GuestsFilter: FC<GuestsFilterProps> = ({
-    guests,
     filteredGuests,
     setfilteredGuests,
-    popUp,
-    setOpenPopUp,
 }): ReactElement => {
+    const router = useRouter()
     const [filters, setFilters] = useState<GuestFilter>(undefined)
 
     const onChangeNameFilter = (value: string): void => {
-        setFilters(prevState => ({ ...prevState, name: value }))
+        setFilters(prevState => ({ ...prevState, name: capitalize(value) }))
     }
 
     const onChangeLastNameFilter = (value: string): void => {
-        setFilters(prevState => ({ ...prevState, lastName: value }))
+        setFilters(prevState => ({ ...prevState, lastName: capitalize(value) }))
     }
 
     const onChangeCivilAssistanceFilter = (value: CivilAssistance): void => {
@@ -138,10 +85,10 @@ const GuestsFilter: FC<GuestsFilterProps> = ({
         let fGuests = filteredGuests
 
         if (filters?.name) {
-            fGuests = fGuests.filter(g => g.name === filters.name)
+            fGuests = fGuests.filter(g => g.name.includes(filters.name))
         }
         if (filters?.lastName) {
-            fGuests = fGuests.filter(g => g.lastName === filters.lastName)
+            fGuests = fGuests.filter(g => g.lastName.includes(filters.lastName))
         }
         if (filters?.civilAssistance) {
             fGuests = fGuests.filter(
@@ -158,94 +105,69 @@ const GuestsFilter: FC<GuestsFilterProps> = ({
         }
 
         setfilteredGuests(fGuests)
-
-        if (popUp) {
-            setOpenPopUp(false)
-        }
-    }
-
-    const clearFilters = (): void => {
-        setfilteredGuests(guests)
-        setFilters(null)
-
-        if (popUp) {
-            setOpenPopUp(false)
-        }
     }
 
     return (
-        <FilterContainer maxWidth="100%" popUp={popUp}>
+        <FilterContainer maxWidth="100%">
             <Container>
-                <span>Name: </span>
-                <Input maxWidth="100%" onChange={onChangeNameFilter} />
+                <InputItem
+                    label="Name"
+                    onChange={onChangeNameFilter}
+                    placeholder="Name"
+                />
             </Container>
             <Container>
-                <span>Last Name: </span>
-                <Input maxWidth="100%" onChange={onChangeLastNameFilter} />
+                <InputItem
+                    label="Last Name"
+                    onChange={onChangeLastNameFilter}
+                    placeholder="Last Name"
+                />
             </Container>
-            <InputItem
-                label="Confirmar asistencia al Civil"
-                onChange={onChangeCivilAssistanceFilter}
-                select
-                placeholder="Asistencia 16 de Febrero"
-                data={civilAssistanceData}
-            />
-            <InputItem
-                label="Confirmar asistencia a la Iglesia y Fiesta"
-                onChange={onChangePartyAssistanceFilter}
-                select
-                placeholder="Asistencia 25 de Febrero"
-                data={partyAssistanceData}
-            />
-            <InputItem
-                label="Menu"
-                onChange={onChangeSpecialMenuFilter}
-                select
-                placeholder="Selecciona tu menu"
-                data={specialMenu}
-            />
-            <Button
-                appearance="primary"
-                style={{
-                    margin: '10px',
-                    width: 55,
-                    height: 36,
-                }}
-                onClick={filterGuests}
-            >
-                {popUp ? 'Apply' : 'Filter'}
-            </Button>
-            <Button
-                appearance="ghost"
-                style={{
-                    margin: '10px',
-                    width: 100,
-                    height: 36,
-                }}
-                onClick={clearFilters}
-            >
-                {popUp ? 'Clear' : 'Clear Filters'}
-            </Button>
-            {popUp && (
-                <Button
-                    appearance="ghost"
-                    style={{
-                        margin: '10px',
-                        width: '-webkit-fill-available',
-                        height: 36,
-                    }}
-                    onClick={(): void => setOpenPopUp(false)}
+            <Container>
+                <InputItem
+                    label="Asistencia al Civil"
+                    onChange={onChangeCivilAssistanceFilter}
+                    select
+                    placeholder="Asistencia 16 de Febrero"
+                    data={civilAssistanceData}
+                />
+            </Container>
+            <Container>
+                <InputItem
+                    label="Asistencia a la Iglesia y Fiesta"
+                    onChange={onChangePartyAssistanceFilter}
+                    select
+                    placeholder="Asistencia 25 de Febrero"
+                    data={partyAssistanceData}
+                />
+            </Container>
+            <Container>
+                <InputItem
+                    label="Menu"
+                    onChange={onChangeSpecialMenuFilter}
+                    select
+                    placeholder="Menu"
+                    data={specialMenu}
+                />
+            </Container>
+            <Container>
+                <StyledButton
+                    style={{ marginBottom: 10, background: theme.colors.pink }}
+                    appearance="primary"
+                    onClick={filterGuests}
                 >
-                    Cancel
-                </Button>
-            )}
+                    Apply
+                </StyledButton>
+                <StyledButton
+                    style={{ background: theme.colors.white.normal }}
+                    appearance="ghost"
+                    onClick={router.reload}
+                >
+                    Clear
+                </StyledButton>
+            </Container>
         </FilterContainer>
     )
 }
 
 export default GuestsFilter
-
-GuestsFilter.defaultProps = {
-    popUp: false,
-    setOpenPopUp: noop,
-}

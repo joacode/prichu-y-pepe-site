@@ -1,13 +1,12 @@
 import { useRouter } from 'next/router'
-import { useContext, useEffect } from 'react'
-import AppContext from 'src/contexts/AppContext'
+import { useEffect } from 'react'
 
 const admin = (): void => {
-    const { auth } = useContext(AppContext)
     const router = useRouter()
 
     useEffect(() => {
-        if (!auth) {
+        const isAuth = sessionStorage.getItem('auth')
+        if (isAuth !== 'true') {
             router.push('/admin/login')
         } else {
             router.push('/admin/prichuypepecom')

@@ -1,5 +1,6 @@
 import React, { FC, ReactElement } from 'react'
 import { Modal } from 'rsuite'
+import { theme } from 'styles/theme'
 import Button from './Button'
 
 interface Props {
@@ -23,12 +24,24 @@ const DeleteGuestModal: FC<Props> = ({
                 be undone
             </Modal.Body>
             <Modal.Footer>
-                <Button appearance="ghost" onClick={(): void => onClose()}>
-                    Cancel
-                </Button>
-                <Button appearance="primary" onClick={(): void => onSubmit()}>
-                    Submit
-                </Button>
+                <div style={{ display: 'flex' }}>
+                    <Button
+                        style={{ background: theme.colors.white.normal }}
+                        appearance="ghost"
+                        onClick={onClose}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        style={{
+                            background: theme.colors.pink,
+                        }}
+                        appearance="primary"
+                        onClick={onSubmit}
+                    >
+                        Submit
+                    </Button>
+                </div>
             </Modal.Footer>
         </Modal>
     )

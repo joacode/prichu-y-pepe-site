@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router'
-import React, { ReactElement, useCallback, useContext, useState } from 'react'
+import React, { ReactElement, useCallback, useState } from 'react'
 import Button from 'src/components/UI/Button'
 import InputItem from 'src/components/UI/InputItem'
 import { loginMessage } from 'src/components/UI/message'
-import AppContext from 'src/contexts/AppContext'
 import styled from 'styled-components'
 import { theme } from 'styles/theme'
 
@@ -15,7 +14,6 @@ const UpperContainer = styled.div`
 
 const LoginPage = (): ReactElement => {
     const router = useRouter()
-    const { setAuth } = useContext(AppContext)
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
 
@@ -33,7 +31,7 @@ const LoginPage = (): ReactElement => {
             password === process.env.NEXT_PUBLIC_PASSWORD
         ) {
             loginMessage('success')
-            setAuth(true)
+            sessionStorage.setItem('auth', 'true')
             router.push('/admin/prichuypepecom')
         } else {
             loginMessage('error')
@@ -50,17 +48,18 @@ const LoginPage = (): ReactElement => {
                 background: theme.colors.background,
             }}
         >
-            <div style={{ width: 500, marginTop: 400 }}>
+            <div style={{ width: 500, marginTop: 250 }}>
                 <UpperContainer>
                     <InputItem
-                        label="Tu nombre"
+                        label="Nombre"
                         onChange={changeName}
                         placeholder="Nombre"
                     />
                     <InputItem
-                        label="Tu apellido"
+                        label="Contraseña"
                         onChange={changePassword}
-                        placeholder="Contrasena"
+                        placeholder="Contraseña"
+                        password
                     />
                 </UpperContainer>
                 <div style={{ padding: 15 }}>

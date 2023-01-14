@@ -47,6 +47,7 @@ interface InputItemProps {
     style?: CSSProperties
     placeholder?: string
     data?: { label: string; value: string }[]
+    password?: boolean
 }
 
 const InputItem: FC<InputItemProps> = ({
@@ -57,6 +58,7 @@ const InputItem: FC<InputItemProps> = ({
     style,
     placeholder,
     data,
+    password,
 }): ReactElement => {
     // const { maxResolutionQuery } = useContext(AppContext)
     return (
@@ -97,6 +99,7 @@ const InputItem: FC<InputItemProps> = ({
                     onChange={onChange}
                     placeholder={placeholder}
                     renderValue
+                    type={!password ? 'text' : 'password'}
                 />
             )}
         </ItemContainer>
@@ -111,4 +114,5 @@ InputItem.defaultProps = {
     placeholder: '',
     select: false,
     data: [],
+    password: false,
 }

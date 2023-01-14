@@ -9,7 +9,7 @@ const BoxContainer = styled.div`
     align-items: center;
     margin: 40px;
     margin-top: 10px;
-    box-shadow: 0px 5px 8px rgb(0 0 0 / 30%);
+    // box-shadow: 0px 5px 8px rgb(0 0 0 / 30%);
     z-index: 2;
     position: relative;
 

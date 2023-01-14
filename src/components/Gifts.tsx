@@ -8,18 +8,10 @@ import PageTitle from './UI/PageTitle'
 
 const Container = styled.div`
     overflow: hidden;
-    height: 100vh;
+    height: 100vh !important;
     background: transparent;
     z-index: 1;
     position: relative;
-
-    @media only screen and (max-width: 375px) and (max-height: 667px) {
-        height: 100vh;
-    }
-
-    @media only screen and (max-width: 360px) and (max-height: 640px) {
-        height: 100vh;
-    }
 `
 
 const A = styled.a`
@@ -46,6 +38,13 @@ const A = styled.a`
     align-content: center;
 
     &:hover {
+        text-decoration: none;
+        background: ${theme.colors.giftCardHover};
+        color: white;
+        transition-duration: 0.25s, 0.25s, 0.25s, 0.25s;
+    }
+
+    &:focus {
         text-decoration: none;
         background: ${theme.colors.giftCardHover};
         color: white;
@@ -88,8 +87,8 @@ const Gifts: FC<GiftsProps> = ({ gifts }): ReactElement => {
                     }}
                 >
                     Que hayas decidido compartir este momento con nosotros es
-                    más que suficiente, pero si queres hacernos un regalo, te
-                    dejamos el link a nuestra lista:
+                    más que suficiente, pero si querés hacernos un regalo, te
+                    dejamos el link a nuestra lista.
                 </Typography>
                 <A
                     href="https://confites.com/pareja/prichuypepe/regalar"

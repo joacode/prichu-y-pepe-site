@@ -9,6 +9,18 @@ export interface GuestInterface {
     partyAssistance: PartyAssistance
     menu: SpecialMenu
     song: string
+    active?: boolean
+}
+
+export interface GuestUpdateRequest {
+    _id: string
+    name?: string
+    lastName?: string
+    civilAssistance?: CivilAssistance
+    partyAssistance?: PartyAssistance
+    menu?: SpecialMenu
+    song?: string
+    active?: boolean
 }
 
 export interface GuestFilter {
@@ -18,6 +30,7 @@ export interface GuestFilter {
     partyAssistance?: PartyAssistance
     menu?: SpecialMenu
     song?: string
+    active?: boolean
 }
 
 const guestSchema = new Schema<GuestInterface>({
@@ -27,6 +40,7 @@ const guestSchema = new Schema<GuestInterface>({
     partyAssistance: ['ALL', 'CEREMONY', 'DONT', 'EMPTY'],
     menu: ['VEGGIE', 'VEGAN', 'COELIAC', 'DEFAULT', 'EMPTY'],
     song: { type: String },
+    active: { type: Boolean, default: true },
 })
 
 const Guest: Model<GuestInterface> =

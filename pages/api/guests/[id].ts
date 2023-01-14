@@ -9,32 +9,34 @@ import { NextApiRequest } from 'next'
 
 export default async function handler(req: NextApiRequest, res): Promise<void> {
     switch (req.method) {
-        // case 'GET': {
-        //     await connectMongo()
-        //     const guest = await Guest.findById(req.query.id).exec()
-        //     const data = JSON.parse(JSON.stringify(guest))
+        case 'GET': {
+            await connectMongo()
+            const guest = await Guest.findById(req.query.id).exec()
+            const data = JSON.parse(JSON.stringify(guest))
 
-        //     res.status(200).json(data)
-        //     break
-        // }
+            res.status(200).json(data)
+            break
+        }
 
-        // case 'PUT': {
-        //     await connectMongo()
-        //     const guest = await Guest.updateOne(
-        //         // eslint-disable-next-line no-underscore-dangle
-        //         { id: req.body._id },
-        //         {
-        //             title: req.body.title,
-        //             detail: req.body.detail,
-        //             amount: req.body.amount,
-        //             type: req.body.type,
-        //             date: req.body.date,
-        //         }
-        //     )
-        //     const data = JSON.parse(JSON.stringify(guest))
-        //     res.status(200).json(data)
-        //     break
-        // }
+        case 'PUT': {
+            await connectMongo()
+            const guest = await Guest.updateOne(
+                // eslint-disable-next-line no-underscore-dangle
+                { id: req.body._id },
+                {
+                    name: req.body.name,
+                    lastName: req.body.lastName,
+                    civilAssistance: req.body.civilAssistance,
+                    partyAssistance: req.body.partyAssistance,
+                    menu: req.body.menu,
+                    song: req.body.song,
+                    active: false,
+                }
+            )
+            const data = JSON.parse(JSON.stringify(guest))
+            res.status(200).json(data)
+            break
+        }
 
         case 'DELETE': {
             await connectMongo()
