@@ -94,7 +94,8 @@ const AdminPage = (): ReactElement => {
                 <div
                     style={{
                         width: '100vw',
-                        height: '100vh',
+                        height: 'fit-content',
+                        paddingBottom: '100px',
                         justifyContent: 'center',
                         background: theme.colors.background,
                     }}
