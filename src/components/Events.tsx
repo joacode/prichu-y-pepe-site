@@ -79,12 +79,12 @@ const ImgContainer = styled.div`
 const locationConfig = [
     {
         title: 'Civil',
-        path: 'https://goo.gl/maps/BuyvMjWG9fcuetES7',
+        path: 'https://goo.gl/maps/jDLRMzuwcYdYTSzp9',
         dressCode: 'Smart Casual',
         img: '/images/heart-test.png',
-        address: 'Moreno 305',
+        address: 'Av. Centenario 1',
         location: 'San Isidro',
-        name: 'Registro Civil San Isidro',
+        name: 'Plaza Municipal Yrigoyen',
         date: '16 FEB 2023 14:15 hs',
         marginText: '*Festejo en Casa Catedral hasta las 00 hs',
         containerStyle: { marginBottom: '90px' },
