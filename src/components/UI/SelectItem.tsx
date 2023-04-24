@@ -1,19 +1,17 @@
 import React, { CSSProperties, FC, ReactElement } from 'react'
 import styled from 'styled-components'
-import { Input as RSInput } from 'rsuite'
+import { SelectPicker as RSSelectPicker } from 'rsuite'
+import { theme } from 'styles/theme'
 import { ChangeGuest } from 'src/models/guest'
 import Typography from './Typography'
 
-const Input = styled(RSInput)`
-    display: inline-block;
+const SelectPicker = styled(RSSelectPicker)`
+    display: inline;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
     border-radius: 0.25rem;
 `
 
@@ -22,22 +20,22 @@ const ItemContainer = styled.div`
     margin-bottom: 16px;
 `
 
-interface InputItemProps {
+interface SelectItemProps {
     label: string
     onChange: (key: string, value: string) => void
-    defaultValue?: string | boolean
-    keyName: ChangeGuest['key']
     style?: CSSProperties
     placeholder?: string
+    data?: { label: string; value: string }[]
+    keyName: ChangeGuest['key']
 }
 
-const InputItem: FC<InputItemProps> = ({
+const SelectItem: FC<SelectItemProps> = ({
     label,
     onChange,
-    defaultValue,
-    keyName,
     style,
     placeholder,
+    data,
+    keyName,
 }): ReactElement => {
     return (
         <ItemContainer style={style}>
@@ -50,22 +48,36 @@ const InputItem: FC<InputItemProps> = ({
             >
                 {label}
             </Typography>
-            <Input
-                defaultValue={defaultValue}
+            <SelectPicker
+                data={data}
+                searchable={false}
+                placeholder={placeholder}
                 onChange={(value: ChangeGuest['value']): void =>
                     onChange(keyName, value)
                 }
-                placeholder={placeholder}
-                renderValue
+                renderMenuItem={(_l, item): JSX.Element => {
+                    return (
+                        <span style={{ color: theme.colors.black }}>
+                            {item?.label}
+                        </span>
+                    )
+                }}
+                renderValue={(_l, item): JSX.Element => {
+                    return (
+                        <span style={{ color: theme.colors.black }}>
+                            {item?.label}
+                        </span>
+                    )
+                }}
             />
         </ItemContainer>
     )
 }
 
-export default InputItem
+export default SelectItem
 
-InputItem.defaultProps = {
-    defaultValue: '',
+SelectItem.defaultProps = {
     style: null,
     placeholder: '',
+    data: [],
 }

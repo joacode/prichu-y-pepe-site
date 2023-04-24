@@ -19,13 +19,6 @@ export const GuestsService = {
         return data
     },
 
-    // THIS SERVICE MAKES A SOFT DELETE. ACTIVATE THE ONE BELOW TO DELETE PERMANENTLY FROM DB
-    // delete: async (guest: GuestUpdateRequest): Promise<GuestUpdateRequest> => {
-    //     // eslint-disable-next-line no-underscore-dangle
-    //     const { data } = await apiClient.put(`${path}/${guest._id}`, guest)
-    //     return data
-    // },
-
     delete: async (id: number): Promise<GuestInterface> => {
         const { data } = await apiClient.delete(`${path}/${id}`)
         return data

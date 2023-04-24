@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import { CivilAssistance, PartyAssistance } from 'src/models/assistance'
 import { SpecialMenu } from 'src/models/specialMenu'
 import { useRouter } from 'next/router'
-import capitalize from 'lodash/capitalize'
 import { theme } from 'styles/theme'
 import Button from './Button'
-import { GuestFilter, GuestInterface } from '../../models/guest'
+import { ChangeGuest, GuestFilter, GuestInterface } from '../../models/guest'
 import InputItem from './InputItem'
+import SelectItem from './SelectItem'
 
 const StyledButton = styled(Button)`
     width: 100px;
@@ -25,7 +25,7 @@ const FilterContainer = styled.div`
 
 interface GuestsFilterProps {
     filteredGuests: GuestInterface[]
-    setfilteredGuests: (g: GuestInterface[]) => void
+    setFilteredGuests: (g: GuestInterface[]) => void
 }
 
 const civilAssistanceData = [
@@ -56,29 +56,19 @@ const specialMenu = [
 
 const GuestsFilter: FC<GuestsFilterProps> = ({
     filteredGuests,
-    setfilteredGuests,
+    setFilteredGuests,
 }): ReactElement => {
     const router = useRouter()
     const [filters, setFilters] = useState<GuestFilter>(undefined)
 
-    const onChangeNameFilter = (value: string): void => {
-        setFilters(prevState => ({ ...prevState, name: capitalize(value) }))
-    }
-
-    const onChangeLastNameFilter = (value: string): void => {
-        setFilters(prevState => ({ ...prevState, lastName: capitalize(value) }))
-    }
-
-    const onChangeCivilAssistanceFilter = (value: CivilAssistance): void => {
-        setFilters(prevState => ({ ...prevState, civilAssistance: value }))
-    }
-
-    const onChangePartyAssistanceFilter = (value: PartyAssistance): void => {
-        setFilters(prevState => ({ ...prevState, partyAssistance: value }))
-    }
-
-    const onChangeSpecialMenuFilter = (value: SpecialMenu): void => {
-        setFilters(prevState => ({ ...prevState, menu: value }))
+    const changeFilter = (
+        key: ChangeGuest['key'],
+        value: ChangeGuest['value']
+    ): void => {
+        setFilters(prevState => ({
+            ...prevState,
+            [key]: value,
+        }))
     }
 
     const filterGuests = (): void => {
@@ -104,7 +94,7 @@ const GuestsFilter: FC<GuestsFilterProps> = ({
             fGuests = fGuests.filter(g => g.menu === filters.menu)
         }
 
-        setfilteredGuests(fGuests)
+        setFilteredGuests(fGuests)
     }
 
     return (
@@ -112,42 +102,44 @@ const GuestsFilter: FC<GuestsFilterProps> = ({
             <Container>
                 <InputItem
                     label="Name"
-                    onChange={onChangeNameFilter}
+                    onChange={changeFilter}
                     placeholder="Name"
+                    keyName="name"
                 />
             </Container>
             <Container>
                 <InputItem
                     label="Last Name"
-                    onChange={onChangeLastNameFilter}
+                    onChange={changeFilter}
                     placeholder="Last Name"
+                    keyName="lastName"
                 />
             </Container>
             <Container>
-                <InputItem
+                <SelectItem
                     label="Asistencia al Civil"
-                    onChange={onChangeCivilAssistanceFilter}
-                    select
+                    onChange={changeFilter}
                     placeholder="Asistencia 16 de Febrero"
                     data={civilAssistanceData}
+                    keyName="civilAssistance"
                 />
             </Container>
             <Container>
-                <InputItem
+                <SelectItem
                     label="Asistencia a la Iglesia y Fiesta"
-                    onChange={onChangePartyAssistanceFilter}
-                    select
+                    onChange={changeFilter}
                     placeholder="Asistencia 25 de Febrero"
                     data={partyAssistanceData}
+                    keyName="partyAssistance"
                 />
             </Container>
             <Container>
-                <InputItem
+                <SelectItem
                     label="Menu"
-                    onChange={onChangeSpecialMenuFilter}
-                    select
+                    onChange={changeFilter}
                     placeholder="Menu"
                     data={specialMenu}
+                    keyName="menu"
                 />
             </Container>
             <Container>

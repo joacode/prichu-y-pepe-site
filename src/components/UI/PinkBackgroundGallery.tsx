@@ -12,10 +12,6 @@ const ImgContainer = styled.div`
 const Img = styled.img`
     height: 120vh;
     width: 100vw;
-
-    // @media only screen and (max-width: 414px) and (max-height: 896px) {
-    //     height: 120vh;
-    // }
 `
 
 const PinkBackgroundGallery: FC<{ reference: MutableRefObject<unknown> }> = ({
