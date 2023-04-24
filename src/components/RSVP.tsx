@@ -45,11 +45,11 @@ const BottomContainer = styled.div`
     }
 `
 
-interface RSVPPRops {
+interface RSVPProps {
     rsvp: MutableRefObject<unknown>
 }
 
-const RSVP: FC<RSVPPRops> = ({ rsvp }): ReactElement => {
+const RSVP: FC<RSVPProps> = ({ rsvp }): ReactElement => {
     const { windowDimensions } = useContext(AppContext)
 
     return (

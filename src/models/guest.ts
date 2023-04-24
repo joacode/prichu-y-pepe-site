@@ -2,6 +2,17 @@ import mongoose, { Schema, Model } from 'mongoose'
 import { CivilAssistance, PartyAssistance } from './assistance'
 import { SpecialMenu } from './specialMenu'
 
+export interface ChangeGuest {
+    key:
+        | 'name'
+        | 'lastName'
+        | 'civilAssistance'
+        | 'partyAssistance'
+        | 'menu'
+        | 'song'
+    value: string | CivilAssistance | PartyAssistance | SpecialMenu
+}
+
 export interface GuestInterface {
     name: string
     lastName: string

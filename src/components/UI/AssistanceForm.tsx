@@ -11,10 +11,10 @@ import { SpecialMenu } from 'src/models/specialMenu'
 import { useRouter } from 'next/router'
 import { CivilAssistance, PartyAssistance } from 'src/models/assistance'
 import { GuestsService } from 'src/services/guestsService'
-import capitalize from 'lodash/capitalize'
+import SelectItem from './SelectItem'
 import Button from './Button'
 import InputItem from './InputItem'
-import { GuestInterface } from '../../models/guest'
+import { ChangeGuest, GuestInterface } from '../../models/guest'
 import AppContext from '../../contexts/AppContext'
 import { addGuestMessage } from './message'
 
@@ -73,45 +73,13 @@ const AssistanceForm: FC = (): ReactElement => {
         song: '',
     })
 
-    const nameChange = (value: string): void => {
+    const changeGuest = (
+        key: ChangeGuest['key'],
+        value: ChangeGuest['value']
+    ): void => {
         setGuest(prevState => ({
             ...prevState,
-            name: capitalize(value),
-        }))
-    }
-
-    const lastNameChange = (value: string): void => {
-        setGuest(prevState => ({
-            ...prevState,
-            lastName: capitalize(value),
-        }))
-    }
-
-    const civilAssistanceChange = (value: CivilAssistance): void => {
-        setGuest(prevState => ({
-            ...prevState,
-            civilAssistance: value,
-        }))
-    }
-
-    const partyAssistanceChange = (value: PartyAssistance): void => {
-        setGuest(prevState => ({
-            ...prevState,
-            partyAssistance: value,
-        }))
-    }
-
-    const menuSelect = (value: SpecialMenu): void => {
-        setGuest(prevState => ({
-            ...prevState,
-            menu: value,
-        }))
-    }
-
-    const songChange = (value: string): void => {
-        setGuest(prevState => ({
-            ...prevState,
-            song: value,
+            [key]: value,
         }))
     }
 
@@ -146,7 +114,7 @@ const AssistanceForm: FC = (): ReactElement => {
             <UpperContainer>
                 <InputItem
                     label="Tu nombre"
-                    onChange={nameChange}
+                    onChange={changeGuest}
                     defaultValue={guest?.name || ''}
                     placeholder={
                         windowDimensions.width <= 485 ||
@@ -154,44 +122,47 @@ const AssistanceForm: FC = (): ReactElement => {
                             ? 'Nombre'
                             : 'Ingresa tu nombre'
                     }
+                    keyName="name"
                 />
                 <InputItem
                     label="Tu apellido"
-                    onChange={lastNameChange}
+                    onChange={changeGuest}
                     placeholder={
                         windowDimensions.width <= 485 ||
                         windowDimensions.width > 768
                             ? 'Apellido'
                             : 'Ingresa tu apellido'
                     }
+                    keyName="lastName"
                 />
             </UpperContainer>
             <div>
-                <InputItem
+                <SelectItem
                     label="Confirmar asistencia al Civil"
-                    onChange={civilAssistanceChange}
-                    select
+                    onChange={changeGuest}
                     placeholder="Asistencia 16 de Febrero"
                     data={civilAssistanceData}
+                    keyName="civilAssistance"
                 />
-                <InputItem
+                <SelectItem
                     label="Confirmar asistencia a la Iglesia y Fiesta"
-                    onChange={partyAssistanceChange}
-                    select
+                    onChange={changeGuest}
                     placeholder="Asistencia 25 de Febrero"
                     data={partyAssistanceData}
+                    keyName="partyAssistance"
                 />
-                <InputItem
+                <SelectItem
                     label="Menu"
-                    onChange={menuSelect}
-                    select
+                    onChange={changeGuest}
                     placeholder="Selecciona tu menu"
                     data={specialMenu}
+                    keyName="menu"
                 />
                 <InputItem
                     label="Una canción que no puede faltar en la pista"
-                    onChange={songChange}
+                    onChange={changeGuest}
                     placeholder="Menea para mi - Damas Gratis"
+                    keyName="song"
                 />
             </div>
             <div style={{ padding: 15 }}>

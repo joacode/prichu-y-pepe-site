@@ -12,9 +12,6 @@ interface TypographyProps {
 }
 
 const Container = styled.div<{ variant: string }>`
-    // font-family: 'Roboto', sans-serif;
-    // font-family: 'GFS Didot', serif;
-    // font-family: 'Cormorant Garamond', serif;
     font-family: ${({ variant }): string => {
         if (variant === 'bannerTitle') {
             return 'haboro-contrast-normal, sans-serif'
