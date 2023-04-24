@@ -45,6 +45,7 @@ class MyDocument extends Document {
                     <link rel="manifest" href="/manifest.json" />
                     <link rel="apple-touch-icon" href="/favicon.ico" />
                     <meta name="theme-color" content="#fff" />
+                    <meta name="color-scheme" content="light only" />
                     <link
                         rel="preconnect"
                         href="https://fonts.googleapis.com"
