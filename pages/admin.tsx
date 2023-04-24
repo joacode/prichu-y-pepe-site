@@ -90,6 +90,7 @@ const AdminPage = (): ReactElement => {
                     style={{
                         width: '100vw',
                         height: 'fit-content',
+                        minHeight: '100vh',
                         paddingBottom: '100px',
                         justifyContent: 'center',
                         background: theme.colors.background,
