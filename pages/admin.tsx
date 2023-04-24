@@ -97,7 +97,7 @@ const AdminPage = (): ReactElement => {
                 >
                     <GuestsFilter
                         filteredGuests={filteredGuests}
-                        setfilteredGuests={setFilteredGuests}
+                        setFilteredGuests={setFilteredGuests}
                     />
                     <Grid style={{ width: 1300 }}>
                         <Table
