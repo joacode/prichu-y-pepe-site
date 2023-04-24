@@ -1,8 +1,8 @@
-#### My girlfriend and I were going to get married and we needed a website with all the events data and the RSVP form.
+#### My fiancé and I wanted to do virtual invitations to our wedding and needed a website to publish information about the events and an RSVP form for guests to confirm attendance.
 
-#### We tried a lot of website templates/apps but none of them fit our necessities, either because we didn't like the design or because it wasn't customizable.
+#### We tried a lot of website templates/apps but none of them fit our needs, either because we didn't like the design or because they weren’t customizable.
 
-#### Almost two months before the wedding we decided to code it. In a bit of a rush, a week later we were deploying and testing the website.
+#### Almost two months before the wedding we decided to code it ourselves. In a bit of a rush, a week later we were deploying and testing the website.
 
 ```bash
   const welcomeMessage = () => {
